@@ -14,7 +14,7 @@ public class Worm : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         double timeSinceInstantiated = MusicManager.GetAudioSourceTime() - timeInstantiated;
         float t = (float)(timeSinceInstantiated / (MusicManager.Instance.wormTime * 2));
