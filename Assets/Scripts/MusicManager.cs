@@ -6,6 +6,7 @@ using Melanchall.DryWetMidi.Interaction;
 using System.IO;
 using UnityEngine.Networking;
 using System;
+using System.Linq;
 
 public class MusicManager : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class MusicManager : MonoBehaviour
     public double errorMargin; // in seconds
     public int inputDelayMilliseconds;
 
-    public string fileLocation;
+    public string fileName;
     public float wormTime;
     public float wormSpawnY;
     public float wormTapY;
@@ -40,14 +41,42 @@ public class MusicManager : MonoBehaviour
 
     private void ReadFromFile()
     {
-        midiFile = MidiFile.Read(Application.streamingAssetsPath + "/" + fileLocation);
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            midiFile = MidiFile.Read(Path.Combine(Application.persistentDataPath, fileName));
+        }
+        else
+        {
+            midiFile = MidiFile.Read(Path.Combine(Application.dataPath, fileName));
+        }
+        
+        /*string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
+        Debug.Log(filePath);
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            UnityWebRequest www = UnityWebRequest.Get(fileName);
+            www.SendWebRequest();
+            while (!www.isDone)
+            {
+            }
+            Debug.Log(www.result);
+            Debug.Log(www.downloadHandler.data.Length);
+            File.WriteAllBytes(Path.Combine(Application.persistentDataPath, "MIDI", fileName), www.downloadHandler.data);
+            midiFile = MidiFile.Read(Path.Combine(Application.persistentDataPath, "MIDI", fileName));
+            
+        }
+        else
+        {
+            midiFile = MidiFile.Read(filePath);
+        }*/
+        
         GetDataFromMidi();
     }
 
     public void GetDataFromMidi()
     {
         var notes = midiFile.GetNotes();
-        var array = new Melanchall.DryWetMidi.Interaction.Note[notes.Count];
+        var array = new Note[notes.Count];
         notes.CopyTo(array, 0);
 
         foreach (var lane in lanes)

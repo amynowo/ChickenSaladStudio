@@ -14,6 +14,7 @@ public class ScoreManager : MonoBehaviour
     public AudioSource missSFX;
     public TMPro.TextMeshPro scoreText;
     static int comboScore;
+    static int strikeCount;
     
     // Start is called before the first frame update
     void Start()
@@ -30,7 +31,7 @@ public class ScoreManager : MonoBehaviour
     }
     public static void Miss()
     {
-        //comboScore = 0;
+        strikeCount++;
         //Instance.missSFX.Play();    
     }
     

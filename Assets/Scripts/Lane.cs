@@ -11,12 +11,18 @@ public class Lane : MonoBehaviour
     public Melanchall.DryWetMidi.MusicTheory.NoteName noteRestriction;
     public KeyCode input;
     public Touch touch;
+    
+    [Range(1, 4)]
+    public int laneNumber;
+    
     public GameObject wormPrefab;
     List<Worm> worms = new List<Worm>();
     public List<double> timeStamps = new List<double>();
     
     int spawnIndex = 0;
     int inputIndex = 0;
+
+    private static int strikes = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -62,27 +68,27 @@ public class Lane : MonoBehaviour
             double timeStamp = timeStamps[inputIndex];
             double marginOfError = MusicManager.Instance.errorMargin;
             double audioTime = MusicManager.GetAudioSourceTime() - (MusicManager.Instance.inputDelayMilliseconds / 1000.0);
-
-            Debug.Log(Input.touchCount);
             
-            if (Input.GetKeyDown(input))
+            if (Touchbox.currentLane == laneNumber)//(Input.GetKeyDown(input))//(Input.touchCount > 0)
             {
                 if (Math.Abs(audioTime - timeStamp) < marginOfError)
                 {
+                    // Tap on worm
                     Hit();
-                    print($"Hit on {inputIndex} note");
                     Destroy(worms[inputIndex].gameObject);
                     inputIndex++;
                 }
                 else
                 {
-                    print($"Hit inaccurate on {inputIndex} note with {Math.Abs(audioTime - timeStamp)} delay");
+                    // Tap on no worm
+                    Miss();
                 }
+                Touchbox.currentLane = 0;
             }
             if (timeStamp + marginOfError <= audioTime)
             {
+                // Missed worm
                 Miss();
-                print($"Missed {inputIndex} note");
                 inputIndex++;
             }
         }
