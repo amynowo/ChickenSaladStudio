@@ -1,13 +1,15 @@
+using System.Collections;
 using UnityEngine;
 using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Interaction;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine.Networking;
 
 public class MusicManager : MonoBehaviour
 {
     public static MusicManager Instance;
-    public AudioSource audioSource;
+    public AudioSource musicAudioSource;
     public Lane[] lanes;
     public float songDelaySeconds;
     public double errorMargin; // in seconds
@@ -33,7 +35,6 @@ public class MusicManager : MonoBehaviour
         Instance = this;
         ReadFromFile();
     }
-
 
     public void ReadFromFile()
     {
@@ -80,17 +81,17 @@ public class MusicManager : MonoBehaviour
         foreach (var lane in lanes)
             lane.SetTimeStamps(array);
 
-        Invoke(nameof(StartSong), songDelaySeconds);
+        Invoke(nameof(PlaySong), songDelaySeconds);
     }
 
-    public void StartSong()
+    public void PlaySong()
     {
-        audioSource.Play();
+        musicAudioSource.Play();
     }
 
     public static double GetAudioSourceTime()
     {
-        return (double)Instance.audioSource.timeSamples / Instance.audioSource.clip.frequency;
+        return (double)Instance.musicAudioSource.timeSamples / Instance.musicAudioSource.clip.frequency;
     }
     
 
