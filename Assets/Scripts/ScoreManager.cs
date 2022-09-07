@@ -1,11 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Melanchall.DryWetMidi.Core;
-using Melanchall.DryWetMidi.Interaction;
-using System.IO;
-using UnityEngine.Networking;
-using System;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -32,7 +25,7 @@ public class ScoreManager : MonoBehaviour
     public static void Miss()
     {
         strikeCount++;
-        //Instance.missSFX.Play();    
+        //Instance.missSFX.Play();
     }
     
 

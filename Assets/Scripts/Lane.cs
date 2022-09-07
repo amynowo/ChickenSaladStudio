@@ -1,10 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Melanchall.DryWetMidi.Interaction;
-using UnityEditor;
-using UnityEngine.Android;
 
 public class Lane : MonoBehaviour
 {
@@ -31,7 +28,7 @@ public class Lane : MonoBehaviour
     }
     
     
-    public void SetTimeStamps(Melanchall.DryWetMidi.Interaction.Note[] array)
+    public void SetTimeStamps(Note[] array)
     {
         foreach (var note in array)
         {
@@ -45,7 +42,7 @@ public class Lane : MonoBehaviour
     
     
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (spawnIndex < timeStamps.Count)
         {

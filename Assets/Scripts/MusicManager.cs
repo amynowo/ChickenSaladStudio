@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Interaction;
 using System.IO;
 using UnityEngine.Networking;
-using System;
 
 public class MusicManager : MonoBehaviour
 {
@@ -16,7 +13,7 @@ public class MusicManager : MonoBehaviour
     public double errorMargin; // in seconds
     public int inputDelayMilliseconds;
 
-    public string fileLocation;
+    public string fileName;
     public float wormTime;
     public float wormSpawnY;
     public float wormTapY;
@@ -38,16 +35,46 @@ public class MusicManager : MonoBehaviour
     }
 
 
-    private void ReadFromFile()
+    public void ReadFromFile()
     {
-        midiFile = MidiFile.Read(Application.streamingAssetsPath + "/" + fileLocation);
+        var filePath = Path.Combine(Application.streamingAssetsPath, fileName);
+        var persistentFilePath = Path.Combine(Application.persistentDataPath, "MIDI", fileName);
+        byte[] midiByteData;
+
+        if (filePath.Contains("://") || filePath.Contains(":///"))
+        {
+            if (Directory.Exists(Path.Combine(Application.persistentDataPath, "MIDI")))
+            {
+                midiFile = MidiFile.Read(persistentFilePath);
+            }
+            else
+            {
+                UnityWebRequest www = UnityWebRequest.Get(filePath);
+                www.SetRequestHeader("Cache-Control", "max-age=0, no-cache, no-store");
+                www.SetRequestHeader("Pragma", "no-cache");
+                while (!www.SendWebRequest().isDone) { ;}
+                midiByteData = www.downloadHandler.data;
+
+                Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, "MIDI"));
+                File.WriteAllBytes(persistentFilePath, midiByteData);
+                
+                www.Dispose();
+                
+                midiFile = MidiFile.Read(persistentFilePath);
+            }
+        }
+        else
+        {
+            midiFile = MidiFile.Read(filePath);
+        }
+
         GetDataFromMidi();
     }
 
     public void GetDataFromMidi()
     {
         var notes = midiFile.GetNotes();
-        var array = new Melanchall.DryWetMidi.Interaction.Note[notes.Count];
+        var array = new Note[notes.Count];
         notes.CopyTo(array, 0);
 
         foreach (var lane in lanes)
@@ -68,7 +95,7 @@ public class MusicManager : MonoBehaviour
     
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         
     }
