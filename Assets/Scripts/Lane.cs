@@ -85,6 +85,15 @@ public class Lane : MonoBehaviour
                 inputIndex++;
             }
         }
+        else
+        {
+            Invoke(nameof(FinishGame), 2);
+        }
+    }
+
+    void FinishGame()
+    {
+        GameResult.Instance.GetComponent<GameResult>().EndLevel("pass");
     }
     
     

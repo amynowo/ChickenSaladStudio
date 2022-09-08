@@ -24,7 +24,7 @@ public class StrikeManager : MonoBehaviour
         strikeCount++;
         if (strikeCount == 3)
         {
-            GameResult.Instance.GetComponent<GameResult>().EndLevel();
+            GameResult.Instance.GetComponent<GameResult>().EndLevel("fail");
         }
     }
 

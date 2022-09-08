@@ -7,14 +7,16 @@ public class GameResult : MonoBehaviour
 {
     public static GameResult Instance;
     [SerializeField] GameObject gameResultMenu;
+    public Sprite[] resultSprites;
 
     void Start()
     {
         Instance = this;
     }
     
-    public void EndLevel()
+    public void EndLevel(string result)
     {
+        Debug.Log(result);
         gameResultMenu.SetActive(true);
         Time.timeScale = 0;
         MusicManager.Instance.musicAudioSource.Pause();
