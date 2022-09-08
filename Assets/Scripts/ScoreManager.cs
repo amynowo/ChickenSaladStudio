@@ -7,23 +7,28 @@ public class ScoreManager : MonoBehaviour
     public AudioSource missSFX;
     public TMPro.TextMeshPro scoreText;
     public static GameObject[] strikeObjects;
-    static int comboScore;
-
+    public static int wormsHit;
+    public static int comboScore;
+    
     // Start is called before the first frame update
     void Start()
     {
         Instance = this;
-        comboScore = 0;
     }
     
     
     public static void Hit()
     {
-        comboScore += 1;
+        wormsHit++;
+        GameResult.wormsHit++;
+        comboScore++;
         //Instance.hitSFX.Play();
     }
     public static void Miss()
     {
+        if (comboScore > GameResult.highestCombo)
+            GameResult.highestCombo = comboScore;
+        comboScore = 0;
         //Instance.missSFX.Play();
     }
     
@@ -31,6 +36,6 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = comboScore.ToString();
+        scoreText.text = wormsHit.ToString();
     }
 }
