@@ -6,9 +6,7 @@ using Melanchall.DryWetMidi.Interaction;
 public class Lane : MonoBehaviour
 {
     public Melanchall.DryWetMidi.MusicTheory.NoteName noteRestriction;
-    public KeyCode input;
-    public Touch touch;
-    
+
     [Range(1, 4)]
     public int laneNumber;
     
@@ -18,8 +16,6 @@ public class Lane : MonoBehaviour
     
     int spawnIndex = 0;
     int inputIndex = 0;
-
-    private static int strikes = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -66,7 +62,7 @@ public class Lane : MonoBehaviour
             double marginOfError = MusicManager.Instance.errorMargin;
             double audioTime = MusicManager.GetAudioSourceTime() - (MusicManager.Instance.inputDelayMilliseconds / 1000.0);
             
-            if (Touchbox.currentLane == laneNumber)//(Input.GetKeyDown(input))//(Input.touchCount > 0)
+            if (Touchbox.currentLane == laneNumber)
             {
                 if (Math.Abs(audioTime - timeStamp) < marginOfError)
                 {
@@ -100,5 +96,6 @@ public class Lane : MonoBehaviour
     private void Miss()
     {
         ScoreManager.Miss();
+        StrikeManager.AddStrike();
     }
 }

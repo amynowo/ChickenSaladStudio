@@ -6,9 +6,9 @@ public class ScoreManager : MonoBehaviour
     public AudioSource hitSFX;
     public AudioSource missSFX;
     public TMPro.TextMeshPro scoreText;
+    public static GameObject[] strikeObjects;
     static int comboScore;
-    static int strikeCount;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +24,7 @@ public class ScoreManager : MonoBehaviour
     }
     public static void Miss()
     {
-        strikeCount++;
+        Debug.Log("MISS");
         //Instance.missSFX.Play();
     }
     
