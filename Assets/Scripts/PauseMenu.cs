@@ -8,21 +8,18 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu; // SerializeField attribute makes var private but will show up in editor
 
-
     public void Pause()
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0;
-        MusicManager.Instance.audioSource.Pause();
+        MusicManager.Instance.musicAudioSource.Pause();
     }
 
     public void Resume()
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
-        MusicManager.Instance.audioSource.UnPause();
-
-
+        MusicManager.Instance.musicAudioSource.UnPause();
     }
 
     public void Home(int sceneId)

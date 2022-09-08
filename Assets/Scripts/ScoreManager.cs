@@ -1,11 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Melanchall.DryWetMidi.Core;
-using Melanchall.DryWetMidi.Interaction;
-using System.IO;
-using UnityEngine.Networking;
-using System;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -13,9 +6,9 @@ public class ScoreManager : MonoBehaviour
     public AudioSource hitSFX;
     public AudioSource missSFX;
     public TMPro.TextMeshPro scoreText;
+    public static GameObject[] strikeObjects;
     static int comboScore;
-    static int strikeCount;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,8 +24,7 @@ public class ScoreManager : MonoBehaviour
     }
     public static void Miss()
     {
-        strikeCount++;
-        //Instance.missSFX.Play();    
+        //Instance.missSFX.Play();
     }
     
 

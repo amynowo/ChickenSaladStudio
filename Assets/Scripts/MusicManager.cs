@@ -1,17 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Interaction;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine.Networking;
-using System;
-using System.Linq;
 
 public class MusicManager : MonoBehaviour
 {
     public static MusicManager Instance;
-    public AudioSource audioSource;
+    public AudioSource musicAudioSource;
     public Lane[] lanes;
     public float songDelaySeconds;
     public double errorMargin; // in seconds
@@ -29,7 +27,7 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    public static MidiFile midiFile;
+    public /*static*/ MidiFile midiFile;
 
     // Start is called before the first frame update
     void Start()
@@ -38,38 +36,39 @@ public class MusicManager : MonoBehaviour
         ReadFromFile();
     }
 
-
-    private void ReadFromFile()
+    public void ReadFromFile()
     {
-        if (Application.platform == RuntimePlatform.Android)
+        var filePath = Path.Combine(Application.streamingAssetsPath, fileName);
+        var persistentFilePath = Path.Combine(Application.persistentDataPath, "MIDI", fileName);
+        byte[] midiByteData;
+
+        if (filePath.Contains("://") || filePath.Contains(":///"))
         {
-            midiFile = MidiFile.Read(Path.Combine(Application.persistentDataPath, fileName));
-        }
-        else
-        {
-            midiFile = MidiFile.Read(Path.Combine(Application.dataPath, fileName));
-        }
-        
-        /*string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
-        Debug.Log(filePath);
-        if (Application.platform == RuntimePlatform.Android)
-        {
-            UnityWebRequest www = UnityWebRequest.Get(fileName);
-            www.SendWebRequest();
-            while (!www.isDone)
+            if (Directory.Exists(Path.Combine(Application.persistentDataPath, "MIDI")))
             {
+                midiFile = MidiFile.Read(persistentFilePath);
             }
-            Debug.Log(www.result);
-            Debug.Log(www.downloadHandler.data.Length);
-            File.WriteAllBytes(Path.Combine(Application.persistentDataPath, "MIDI", fileName), www.downloadHandler.data);
-            midiFile = MidiFile.Read(Path.Combine(Application.persistentDataPath, "MIDI", fileName));
-            
+            else
+            {
+                UnityWebRequest www = UnityWebRequest.Get(filePath);
+                www.SetRequestHeader("Cache-Control", "max-age=0, no-cache, no-store");
+                www.SetRequestHeader("Pragma", "no-cache");
+                while (!www.SendWebRequest().isDone) { ;}
+                midiByteData = www.downloadHandler.data;
+
+                Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, "MIDI"));
+                File.WriteAllBytes(persistentFilePath, midiByteData);
+                
+                www.Dispose();
+                
+                midiFile = MidiFile.Read(persistentFilePath);
+            }
         }
         else
         {
             midiFile = MidiFile.Read(filePath);
-        }*/
-        
+        }
+
         GetDataFromMidi();
     }
 
@@ -82,17 +81,17 @@ public class MusicManager : MonoBehaviour
         foreach (var lane in lanes)
             lane.SetTimeStamps(array);
 
-        Invoke(nameof(StartSong), songDelaySeconds);
+        Invoke(nameof(PlaySong), songDelaySeconds);
     }
 
-    public void StartSong()
+    public void PlaySong()
     {
-        audioSource.Play();
+        musicAudioSource.Play();
     }
 
-    public static double GetAudioSourceTime()
+    public /*static*/ double GetAudioSourceTime()
     {
-        return (double)Instance.audioSource.timeSamples / Instance.audioSource.clip.frequency;
+        return (double)musicAudioSource.timeSamples / musicAudioSource.clip.frequency;
     }
     
 

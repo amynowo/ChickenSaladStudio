@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Worm : MonoBehaviour
 {
@@ -10,13 +11,13 @@ public class Worm : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timeInstantiated = MusicManager.GetAudioSourceTime();
+        timeInstantiated = MusicManager.Instance.GetAudioSourceTime();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        double timeSinceInstantiated = MusicManager.GetAudioSourceTime() - timeInstantiated;
+        double timeSinceInstantiated = MusicManager.Instance.GetAudioSourceTime() - timeInstantiated;
         float t = (float)(timeSinceInstantiated / (MusicManager.Instance.wormTime * 2));
 
         GetComponent<SpriteRenderer>().enabled = true;

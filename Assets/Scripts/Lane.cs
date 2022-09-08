@@ -1,17 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Melanchall.DryWetMidi.Interaction;
-using UnityEditor;
-using UnityEngine.Android;
 
 public class Lane : MonoBehaviour
 {
     public Melanchall.DryWetMidi.MusicTheory.NoteName noteRestriction;
-    public KeyCode input;
-    public Touch touch;
-    
+
     [Range(1, 4)]
     public int laneNumber;
     
@@ -21,8 +16,6 @@ public class Lane : MonoBehaviour
     
     int spawnIndex = 0;
     int inputIndex = 0;
-
-    private static int strikes = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -31,13 +24,13 @@ public class Lane : MonoBehaviour
     }
     
     
-    public void SetTimeStamps(Melanchall.DryWetMidi.Interaction.Note[] array)
+    public void SetTimeStamps(Note[] array)
     {
         foreach (var note in array)
         {
             if (note.NoteName == noteRestriction)
             {
-                var metricTimeSpan = TimeConverter.ConvertTo<MetricTimeSpan>(note.Time, MusicManager.midiFile.GetTempoMap());
+                var metricTimeSpan = TimeConverter.ConvertTo<MetricTimeSpan>(note.Time, MusicManager.Instance.midiFile.GetTempoMap());
                 timeStamps.Add((double)metricTimeSpan.Minutes * 60f + metricTimeSpan.Seconds + (double)metricTimeSpan.Milliseconds / 1000f);
             }
         }
@@ -49,7 +42,7 @@ public class Lane : MonoBehaviour
     {
         if (spawnIndex < timeStamps.Count)
         {
-            if (MusicManager.GetAudioSourceTime() >= timeStamps[spawnIndex] - MusicManager.Instance.wormTime)
+            if (MusicManager.Instance.GetAudioSourceTime() >= timeStamps[spawnIndex] - MusicManager.Instance.wormTime)
             {
                 // Inistantiating a worm and adding it to the list of worms
                 var worm = Instantiate(wormPrefab, transform);
@@ -67,9 +60,9 @@ public class Lane : MonoBehaviour
         {
             double timeStamp = timeStamps[inputIndex];
             double marginOfError = MusicManager.Instance.errorMargin;
-            double audioTime = MusicManager.GetAudioSourceTime() - (MusicManager.Instance.inputDelayMilliseconds / 1000.0);
+            double audioTime = MusicManager.Instance.GetAudioSourceTime() - (MusicManager.Instance.inputDelayMilliseconds / 1000.0);
             
-            if (Touchbox.currentLane == laneNumber)//(Input.GetKeyDown(input))//(Input.touchCount > 0)
+            if (Touchbox.currentLane == laneNumber)
             {
                 if (Math.Abs(audioTime - timeStamp) < marginOfError)
                 {
@@ -81,7 +74,7 @@ public class Lane : MonoBehaviour
                 else
                 {
                     // Tap on no worm
-                    Miss();
+                    //Miss();
                 }
                 Touchbox.currentLane = 0;
             }
@@ -103,5 +96,6 @@ public class Lane : MonoBehaviour
     private void Miss()
     {
         ScoreManager.Miss();
+        StrikeManager.Instance.AddStrike();
     }
 }
