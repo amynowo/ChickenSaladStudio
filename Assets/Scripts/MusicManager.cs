@@ -27,7 +27,7 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    public static MidiFile midiFile;
+    public /*static*/ MidiFile midiFile;
 
     // Start is called before the first frame update
     void Start()
@@ -89,9 +89,9 @@ public class MusicManager : MonoBehaviour
         musicAudioSource.Play();
     }
 
-    public static double GetAudioSourceTime()
+    public /*static*/ double GetAudioSourceTime()
     {
-        return (double)Instance.musicAudioSource.timeSamples / Instance.musicAudioSource.clip.frequency;
+        return (double)musicAudioSource.timeSamples / musicAudioSource.clip.frequency;
     }
     
 

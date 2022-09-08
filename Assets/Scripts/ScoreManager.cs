@@ -24,7 +24,6 @@ public class ScoreManager : MonoBehaviour
     }
     public static void Miss()
     {
-        Debug.Log("MISS");
         //Instance.missSFX.Play();
     }
     

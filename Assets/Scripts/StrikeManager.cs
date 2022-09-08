@@ -7,22 +7,24 @@ public class StrikeManager : MonoBehaviour
 {
     public static StrikeManager Instance;
     public Sprite[] strikeSprites;
-    static int strikeCount = 0;
+    static int strikeCount;
     
     // Start is called before the first frame update
     void Start()
     {
         Instance = this;
+        strikeCount = 0;
     }
 
-    public static void AddStrike()
+    public void AddStrike()
     {
-        Instance.GetComponentsInChildren<SpriteRenderer>()[strikeCount].sprite = Instance.strikeSprites[1];
+        if (strikeCount <= 3)
+            Instance.GetComponentsInChildren<SpriteRenderer>()[strikeCount].sprite = Instance.strikeSprites[1];
+
         strikeCount++;
         if (strikeCount == 3)
         {
-            Time.timeScale = 0;
-            MusicManager.Instance.musicAudioSource.Pause();
+            GameResult.Instance.GetComponent<GameResult>().EndLevel();
         }
     }
 
