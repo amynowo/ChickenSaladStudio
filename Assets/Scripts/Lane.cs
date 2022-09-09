@@ -81,8 +81,7 @@ public class Lane : MonoBehaviour
             if (timeStamp + marginOfError <= audioTime)
             {
                 // Missed worm
-                //Miss();
-                Hit();
+                Miss();
                 inputIndex++;
             }
         }
