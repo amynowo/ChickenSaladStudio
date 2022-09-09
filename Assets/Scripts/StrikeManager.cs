@@ -22,10 +22,10 @@ public class StrikeManager : MonoBehaviour
             Instance.GetComponentsInChildren<SpriteRenderer>()[strikeCount].sprite = Instance.strikeSprites[1];
 
         strikeCount++;
-        GameResult.strikes++;
+        GameResult.Instance.strikes++;
         if (strikeCount == 3)
         {
-            GameResult.Instance.GetComponent<GameResult>().EndLevel("fail");
+            GameResult.Instance.GetComponent<GameResult>().EndLevel(false);
         }
     }
 

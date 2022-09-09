@@ -81,7 +81,8 @@ public class Lane : MonoBehaviour
             if (timeStamp + marginOfError <= audioTime)
             {
                 // Missed worm
-                Miss();
+                //Miss();
+                Hit();
                 inputIndex++;
             }
         }
@@ -93,19 +94,19 @@ public class Lane : MonoBehaviour
 
     void FinishGame()
     {
-        GameResult.Instance.GetComponent<GameResult>().EndLevel("pass");
+        GameResult.Instance.GetComponent<GameResult>().EndLevel(true);
     }
     
     
     private void Hit()
     {
-        GameResult.totalWorms++;
+        GameResult.Instance.totalWorms++;
         ScoreManager.Hit();
     }
         
     private void Miss()
     {
-        GameResult.totalWorms++;
+        GameResult.Instance.totalWorms++;
         ScoreManager.Miss();
         StrikeManager.Instance.AddStrike();
     }

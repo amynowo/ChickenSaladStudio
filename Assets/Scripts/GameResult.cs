@@ -11,36 +11,44 @@ public class GameResult : MonoBehaviour
     [SerializeField] GameObject gameResultMenu;
     public Sprite[] resultSprites;
     
-    public static int wormsHit;
-    public static int totalWorms;
-    public static int highestCombo;
-    public static int strikes;
+    static bool gamePassed;
+    public int wormsHit;
+    public int totalWorms;
+    public int highestCombo;
+    public int strikes;
 
     void Start()
     {
         Instance = this;
     }
     
-    public void EndLevel(string result)
+    public void EndLevel(bool pass)
     {
         gameResultMenu.SetActive(true);
         Time.timeScale = 0;
         MusicManager.Instance.musicAudioSource.Pause();
 
-        highestCombo = (highestCombo == 0 ? highestCombo = ScoreManager.comboScore : highestCombo);
-        if (result == "pass")
-            Instance.gameResultMenu.GetComponentInChildren<SpriteRenderer>().sprite = Instance.resultSprites[0];
-        else
-            Instance.gameResultMenu.GetComponentInChildren<SpriteRenderer>().sprite = Instance.resultSprites[1];
-
-        Instance.gameResultMenu.GetComponentInChildren<TextMeshPro>().text = $"Worms hit: {wormsHit}/{totalWorms}\nHighest combo: {highestCombo}\nStrikes: {strikes}";
+        gamePassed = pass;
+        SaveHighscore();
     }
 
-    public void Replay()
+    void SaveHighscore()
     {
-        ResetStats();
-        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
-        Time.timeScale = 1;
+        int currentHighscore = PlayerPrefs.GetInt("highscore", 0);
+        if (currentHighscore < wormsHit)
+        {
+            PlayerPrefs.SetInt("highscore", wormsHit);
+            DisplayStats(true);
+        }
+
+        DisplayStats(false);
+    }
+
+    void DisplayStats(bool newHighscore)
+    {
+        highestCombo = (highestCombo == 0 ? highestCombo = ScoreManager.comboScore : highestCombo); 
+        Instance.gameResultMenu.GetComponentInChildren<SpriteRenderer>().sprite = Instance.resultSprites[(gamePassed ? 0 : 1)];
+        Instance.gameResultMenu.GetComponentInChildren<TextMeshPro>().text = $"{(newHighscore ? "New high score!\n" : "")}Worms hit: {wormsHit}/{totalWorms}\nHighest combo: {highestCombo}\nStrikes: {strikes}";
     }
 
     void ResetStats()
@@ -51,6 +59,13 @@ public class GameResult : MonoBehaviour
         strikes = 0;
         ScoreManager.wormsHit = 0;
         ScoreManager.comboScore = 0;
+    }
+    
+    public void Replay()
+    {
+        ResetStats();
+        SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+        Time.timeScale = 1;
     }
 
     public void Home(int sceneId)

@@ -20,14 +20,14 @@ public class ScoreManager : MonoBehaviour
     public static void Hit()
     {
         wormsHit++;
-        GameResult.wormsHit++;
+        GameResult.Instance.wormsHit++;
         comboScore++;
         //Instance.hitSFX.Play();
     }
     public static void Miss()
     {
-        if (comboScore > GameResult.highestCombo)
-            GameResult.highestCombo = comboScore;
+        if (comboScore > GameResult.Instance.highestCombo)
+            GameResult.Instance.highestCombo = comboScore;
         comboScore = 0;
         //Instance.missSFX.Play();
     }
