@@ -47,7 +47,7 @@ public class Lane : MonoBehaviour
                 // Inistantiating a worm and adding it to the list of worms
                 var worm = Instantiate(wormPrefab, transform);
                 worms.Add(worm.GetComponent<Worm>());
-                
+
                 // Setting the worms assigned time so the worm know when to spawn
                 worm.GetComponent<Worm>().assignedTime = (float)timeStamps[spawnIndex];
                 
@@ -85,16 +85,21 @@ public class Lane : MonoBehaviour
                 inputIndex++;
             }
         }
+        else
+        {
+            ScoreManager.Instance.laneCheck[laneNumber - 1] = true;
+        }
     }
-    
-    
+
     private void Hit()
     {
+        GameResult.Instance.totalWorms++;
         ScoreManager.Hit();
     }
         
     private void Miss()
     {
+        GameResult.Instance.totalWorms++;
         ScoreManager.Miss();
         StrikeManager.Instance.AddStrike();
     }

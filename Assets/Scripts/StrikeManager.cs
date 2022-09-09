@@ -7,7 +7,7 @@ public class StrikeManager : MonoBehaviour
 {
     public static StrikeManager Instance;
     public Sprite[] strikeSprites;
-    static int strikeCount;
+    public static int strikeCount;
     
     // Start is called before the first frame update
     void Start()
@@ -22,9 +22,11 @@ public class StrikeManager : MonoBehaviour
             Instance.GetComponentsInChildren<SpriteRenderer>()[strikeCount].sprite = Instance.strikeSprites[1];
 
         strikeCount++;
+        GameResult.Instance.strikes++;
         if (strikeCount == 3)
         {
-            GameResult.Instance.GetComponent<GameResult>().EndLevel();
+            GameResult.Instance.GetComponent<GameResult>().EndLevel(false);
+            
         }
     }
 
