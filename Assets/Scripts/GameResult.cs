@@ -20,6 +20,7 @@ public class GameResult : MonoBehaviour
     void Start()
     {
         Instance = this;
+        gameResultMenu.SetActive(false);
     }
     
     public void EndLevel(bool pass)
@@ -34,14 +35,15 @@ public class GameResult : MonoBehaviour
 
     void SaveHighscore()
     {
+        bool newHighscore = false;
         int currentHighscore = PlayerPrefs.GetInt("highscore", 0);
         if (currentHighscore < wormsHit)
         {
             PlayerPrefs.SetInt("highscore", wormsHit);
-            DisplayStats(true);
+            newHighscore = true;
         }
 
-        DisplayStats(false);
+        DisplayStats(newHighscore);
     }
 
     void DisplayStats(bool newHighscore)

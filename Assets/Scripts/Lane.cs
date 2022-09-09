@@ -87,16 +87,10 @@ public class Lane : MonoBehaviour
         }
         else
         {
-            Invoke(nameof(FinishGame), 2);
+            ScoreManager.Instance.laneCheck[laneNumber - 1] = true;
         }
     }
 
-    void FinishGame()
-    {
-        GameResult.Instance.GetComponent<GameResult>().EndLevel(true);
-    }
-    
-    
     private void Hit()
     {
         GameResult.Instance.totalWorms++;

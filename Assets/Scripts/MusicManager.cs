@@ -33,10 +33,10 @@ public class MusicManager : MonoBehaviour
     void Start()
     {
         Instance = this;
-        ReadFromFile();
+        StartCoroutine(nameof(ReadFromFile));
     }
 
-    public void ReadFromFile()
+    IEnumerator ReadFromFile()
     {
         var filePath = Path.Combine(Application.streamingAssetsPath, fileName);
         var persistentFilePath = Path.Combine(Application.persistentDataPath, "MIDI", fileName);
@@ -50,16 +50,23 @@ public class MusicManager : MonoBehaviour
             }
             else
             {
-                UnityWebRequest www = UnityWebRequest.Get(filePath);
+                using (UnityWebRequest request = UnityWebRequest.Get(filePath))
+                {
+                    yield return request.SendWebRequest();
+                    midiByteData = request.downloadHandler.data;
+                }
+                
+                /*UnityWebRequest www = UnityWebRequest.Get(filePath);
                 www.SetRequestHeader("Cache-Control", "max-age=0, no-cache, no-store");
                 www.SetRequestHeader("Pragma", "no-cache");
-                while (!www.SendWebRequest().isDone) { ;}
-                midiByteData = www.downloadHandler.data;
+                var response = www.SendWebRequest();
+                while (response. == true) { ;}
+                midiByteData = www.downloadHandler.data;*/
 
                 Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, "MIDI"));
                 File.WriteAllBytes(persistentFilePath, midiByteData);
                 
-                www.Dispose();
+                //www.Dispose();
                 
                 midiFile = MidiFile.Read(persistentFilePath);
             }

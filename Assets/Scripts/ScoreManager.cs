@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
@@ -10,10 +11,17 @@ public class ScoreManager : MonoBehaviour
     public static int wormsHit;
     public static int comboScore;
     
+    public bool[] laneCheck;
+    
     // Start is called before the first frame update
     void Start()
     {
         Instance = this;
+        laneCheck = new bool[4];
+        for (int i = 0; i < 4; i++)
+        {
+            laneCheck[i] = false;
+        }
     }
     
     
@@ -31,11 +39,25 @@ public class ScoreManager : MonoBehaviour
         comboScore = 0;
         //Instance.missSFX.Play();
     }
+
+    void CheckGameOver()
+    {
+        if (laneCheck.All(x => x))
+        {
+            Invoke(nameof(FinishGame), 2);
+        }
+    }
     
+    void FinishGame()
+    {
+        if (!MusicManager.Instance.musicAudioSource.isPlaying)
+            GameResult.Instance.GetComponent<GameResult>().EndLevel(true);
+    }
 
     // Update is called once per frame
     void Update()
     {
         scoreText.text = wormsHit.ToString();
+        CheckGameOver();
     }
 }
