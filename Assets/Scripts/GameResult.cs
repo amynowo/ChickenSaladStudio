@@ -70,9 +70,9 @@ public class GameResult : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public void Home(int sceneId)
+    public void Home()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(sceneId);
+        SceneManager.LoadScene("StartScene");
     }
 }

@@ -1,14 +1,17 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Interaction;
 using System.IO;
 using Unity.VisualScripting;
+using UnityEngine.Audio;
 using UnityEngine.Networking;
 
 public class MusicManager : MonoBehaviour
 {
     public static MusicManager Instance;
+    [SerializeField] private AudioMixer audioMixer;
     public AudioSource musicAudioSource;
     public Lane[] lanes;
     public float songDelaySeconds;
@@ -21,17 +24,15 @@ public class MusicManager : MonoBehaviour
     public float wormTapY;
     public float wormDespawnY
     {
-        get
-        {
-            return wormTapY - (wormSpawnY - wormTapY);
-        }
+        get { return wormTapY - (wormSpawnY - wormTapY); }
     }
 
-    public /*static*/ MidiFile midiFile;
-
+    public MidiFile midiFile;
+    
     // Start is called before the first frame update
     void Start()
     {
+        audioMixer.SetFloat("Music", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
         Instance = this;
         StartCoroutine(nameof(ReadFromFile));
     }
@@ -55,18 +56,9 @@ public class MusicManager : MonoBehaviour
                     yield return request.SendWebRequest();
                     midiByteData = request.downloadHandler.data;
                 }
-                
-                /*UnityWebRequest www = UnityWebRequest.Get(filePath);
-                www.SetRequestHeader("Cache-Control", "max-age=0, no-cache, no-store");
-                www.SetRequestHeader("Pragma", "no-cache");
-                var response = www.SendWebRequest();
-                while (response. == true) { ;}
-                midiByteData = www.downloadHandler.data;*/
 
                 Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, "MIDI"));
                 File.WriteAllBytes(persistentFilePath, midiByteData);
-                
-                //www.Dispose();
                 
                 midiFile = MidiFile.Read(persistentFilePath);
             }
@@ -96,7 +88,7 @@ public class MusicManager : MonoBehaviour
         musicAudioSource.Play();
     }
 
-    public /*static*/ double GetAudioSourceTime()
+    public double GetAudioSourceTime()
     {
         return (double)musicAudioSource.timeSamples / musicAudioSource.clip.frequency;
     }
