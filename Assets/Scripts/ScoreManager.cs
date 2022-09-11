@@ -50,7 +50,7 @@ public class ScoreManager : MonoBehaviour
     
     void FinishGame()
     {
-        if (!MusicManager.Instance.musicAudioSource.isPlaying)
+        if (GameResult.Instance.totalWorms > 0)
             GameResult.Instance.GetComponent<GameResult>().EndLevel(true);
     }
 

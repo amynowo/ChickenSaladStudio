@@ -22,13 +22,9 @@ public class Touchbox : MonoBehaviour
             var wp = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
             var touchPosition = new Vector2(wp.x, wp.y);
  
-            if (GetComponent<PolygonCollider2D>() == Physics2D.OverlapPoint(touchPosition))
+            if (GetComponent<BoxCollider2D>() == Physics2D.OverlapPoint(touchPosition))
             {
                 currentLane = laneNumber;
-                //Debug.Log($"Lane {laneNumber} HIT!");
-            }
-            else{
-                //Debug.Log("MISS");
             }
         }
     }
