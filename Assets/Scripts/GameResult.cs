@@ -49,7 +49,7 @@ public class GameResult : MonoBehaviour
     void DisplayStats(bool newHighscore)
     {
         highestCombo = (highestCombo == 0 ? highestCombo = ScoreManager.comboScore : highestCombo); 
-        Instance.gameResultMenu.GetComponentInChildren<SpriteRenderer>().sprite = Instance.resultSprites[(gamePassed ? 0 : 1)];
+        Instance.gameResultMenu.GetComponentInChildren<SpriteRenderer>().sprite = Instance.resultSprites[(!gamePassed ? 0 : 1)];
         Instance.gameResultMenu.GetComponentInChildren<TextMeshPro>().text = $"{(newHighscore ? "New high score!\n" : "")}Worms hit: {wormsHit}/{totalWorms}\nHighest combo: {highestCombo}\nStrikes: {strikes}";
     }
 

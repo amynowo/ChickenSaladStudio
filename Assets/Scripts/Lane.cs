@@ -87,7 +87,8 @@ public class Lane : MonoBehaviour
         }
         else
         {
-            ScoreManager.Instance.laneCheck[laneNumber - 1] = true;
+            if(inputIndex > 0)
+                ScoreManager.Instance.laneCheck[laneNumber - 1] = true;
         }
     }
 
