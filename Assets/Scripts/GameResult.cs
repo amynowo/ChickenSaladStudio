@@ -9,7 +9,9 @@ public class GameResult : MonoBehaviour
 {
     public static GameResult Instance;
     [SerializeField] GameObject gameResultMenu;
+    [SerializeField] SpriteRenderer resultImage;
     public Sprite[] resultSprites;
+    [SerializeField] GameObject pauseButton;
     
     static bool gamePassed;
     public int wormsHit;
@@ -25,6 +27,7 @@ public class GameResult : MonoBehaviour
     
     public void EndLevel(bool pass)
     {
+        pauseButton.SetActive(false);
         gameResultMenu.SetActive(true);
         Time.timeScale = 0;
         MusicManager.Instance.musicAudioSource.Pause();
@@ -48,12 +51,12 @@ public class GameResult : MonoBehaviour
 
     void DisplayStats(bool newHighscore)
     {
-        highestCombo = (highestCombo == 0 ? highestCombo = ScoreManager.comboScore : highestCombo); 
-        Instance.gameResultMenu.GetComponentInChildren<SpriteRenderer>().sprite = Instance.resultSprites[(!gamePassed ? 0 : 1)];
-        Instance.gameResultMenu.GetComponentInChildren<TextMeshPro>().text = $"{(newHighscore ? "New high score!\n" : "")}Worms hit: {wormsHit}/{totalWorms}\nHighest combo: {highestCombo}\nStrikes: {strikes}";
+        highestCombo = (highestCombo == 0 ? highestCombo = ScoreManager.comboScore : highestCombo);
+        resultImage.sprite = Instance.resultSprites[(!gamePassed ? 0 : 1)];
+        Instance.gameResultMenu.GetComponentInChildren<TextMeshPro>().text = $"{(newHighscore ? "New high score!\n" : $"Current high score: {PlayerPrefs.GetInt("highscore")}\n")}Worms hit: {wormsHit}/{totalWorms}\nHighest combo: {highestCombo}\nStrikes: {strikes}";
     }
 
-    void ResetStats()
+    public void ResetStats()
     {
         wormsHit = 0;
         totalWorms = 0;

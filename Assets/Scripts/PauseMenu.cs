@@ -8,12 +8,14 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
+    [SerializeField] GameObject pauseButton;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private Slider musicVolumeSlider;
     
     public void Pause()
     {
+        pauseButton.SetActive(false);
         pauseMenu.SetActive(true);
         Time.timeScale = 0;
         MusicManager.Instance.musicAudioSource.Pause();
@@ -34,12 +36,15 @@ public class PauseMenu : MonoBehaviour
     public void Resume()
     {
         pauseMenu.SetActive(false);
+        pauseButton.SetActive(true);
         Time.timeScale = 1;
         MusicManager.Instance.musicAudioSource.UnPause();
     }
 
     public void Home()
     {
+        //pauseButton.SetActive(true);
+        GameResult.Instance.ResetStats();
         Time.timeScale = 1;
         SceneManager.LoadScene("StartScene");
     }
