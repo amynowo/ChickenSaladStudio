@@ -17,7 +17,7 @@ public class GameResult : MonoBehaviour
     public int wormsHit;
     public int totalWorms;
     public int highestCombo;
-    public int strikes;
+    public int lives = 3;
 
     void Start()
     {
@@ -53,7 +53,7 @@ public class GameResult : MonoBehaviour
     {
         highestCombo = (highestCombo == 0 ? highestCombo = ScoreManager.comboScore : highestCombo);
         resultImage.sprite = Instance.resultSprites[(!gamePassed ? 0 : 1)];
-        Instance.gameResultMenu.GetComponentInChildren<TextMeshPro>().text = $"{(newHighscore ? "New high score!\n" : $"Current high score: {PlayerPrefs.GetInt("highscore")}\n")}Worms hit: {wormsHit}/{totalWorms}\nHighest combo: {highestCombo}\nStrikes: {strikes}";
+        Instance.gameResultMenu.GetComponentInChildren<TextMeshPro>().text = $"{(newHighscore ? "New high score!\n" : $"Current high score: {PlayerPrefs.GetInt("highscore")}\n")}Worms hit: {wormsHit}/{totalWorms}\nHighest combo: {highestCombo}\nLives left: {LifeManager.lifeCount}";
     }
 
     public void ResetStats()
@@ -61,7 +61,7 @@ public class GameResult : MonoBehaviour
         wormsHit = 0;
         totalWorms = 0;
         highestCombo = 0;
-        strikes = 0;
+        lives = 3;
         ScoreManager.wormsHit = 0;
         ScoreManager.comboScore = 0;
     }

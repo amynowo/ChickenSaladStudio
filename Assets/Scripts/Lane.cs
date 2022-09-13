@@ -102,6 +102,6 @@ public class Lane : MonoBehaviour
     {
         GameResult.Instance.totalWorms++;
         ScoreManager.Miss();
-        StrikeManager.Instance.AddStrike();
+        LifeManager.Instance.RemoveLife();
     }
 }
