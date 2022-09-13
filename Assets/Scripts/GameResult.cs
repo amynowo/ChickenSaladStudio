@@ -66,15 +66,16 @@ public class GameResult : MonoBehaviour
         ScoreManager.comboScore = 0;
     }
     
-    public void Replay()
+    public void Restart()
     {
         ResetStats();
         SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
         Time.timeScale = 1;
     }
 
-    public void Home()
+    public void Quit()
     {
+        ResetStats();
         Time.timeScale = 1;
         SceneManager.LoadScene("StartScene");
     }

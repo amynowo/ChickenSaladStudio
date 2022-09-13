@@ -33,7 +33,7 @@ public class PauseMenu : MonoBehaviour
         audioMixer.SetFloat("Music", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
     }
 
-    public void Resume()
+    public void Continue()
     {
         pauseMenu.SetActive(false);
         pauseButton.SetActive(true);
@@ -43,7 +43,6 @@ public class PauseMenu : MonoBehaviour
 
     public void Home()
     {
-        //pauseButton.SetActive(true);
         GameResult.Instance.ResetStats();
         Time.timeScale = 1;
         SceneManager.LoadScene("StartScene");
