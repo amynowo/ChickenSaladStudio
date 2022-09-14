@@ -12,6 +12,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private Slider musicVolumeSlider;
+    [SerializeField] GameObject birds;
+    [SerializeField] GameObject branch;
     
     public void Pause()
     {
@@ -20,6 +22,9 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0;
         MusicManager.Instance.musicAudioSource.Pause();
         SetMusicVolumeSlider();
+        foreach (var bird in birds.GetComponentsInChildren<SpriteRenderer>())
+            bird.sortingOrder = 1;
+        branch.GetComponent<SpriteRenderer>().sortingOrder = 0;
     }
 
     void SetMusicVolumeSlider()
@@ -35,6 +40,10 @@ public class PauseMenu : MonoBehaviour
 
     public void Continue()
     {
+        foreach (var bird in birds.GetComponentsInChildren<SpriteRenderer>())
+            bird.sortingOrder = 5;
+        branch.GetComponent<SpriteRenderer>().sortingOrder = 4;
+        
         pauseMenu.SetActive(false);
         pauseButton.SetActive(true);
         Time.timeScale = 1;

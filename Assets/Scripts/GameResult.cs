@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,6 +14,7 @@ public class GameResult : MonoBehaviour
     [SerializeField] SpriteRenderer resultImage;
     public Sprite[] resultSprites;
     [SerializeField] GameObject pauseButton;
+    [SerializeField] GameObject birds;
     
     static bool gamePassed;
     public int wormsHit;
@@ -31,6 +34,9 @@ public class GameResult : MonoBehaviour
         gameResultMenu.SetActive(true);
         Time.timeScale = 0;
         MusicManager.Instance.musicAudioSource.Pause();
+
+        foreach (var bird in birds.GetComponentsInChildren<BoxCollider2D>())
+            bird.enabled = false;
 
         gamePassed = pass;
         SaveHighscore();
@@ -53,7 +59,7 @@ public class GameResult : MonoBehaviour
     {
         highestCombo = (highestCombo == 0 ? highestCombo = ScoreManager.comboScore : highestCombo);
         resultImage.sprite = Instance.resultSprites[(!gamePassed ? 0 : 1)];
-        Instance.gameResultMenu.GetComponentInChildren<TextMeshPro>().text = $"{(newHighscore ? "New high score!\n" : $"Current high score: {PlayerPrefs.GetInt("highscore")}\n")}Worms hit: {wormsHit}/{totalWorms}\nHighest combo: {highestCombo}\nLives left: {LifeManager.lifeCount}";
+        Instance.gameResultMenu.GetComponentInChildren<TextMeshPro>().text = $"Hitrate: {(int)Math.Round((double)(100 * wormsHit) / totalWorms)}%";
     }
 
     public void ResetStats()
