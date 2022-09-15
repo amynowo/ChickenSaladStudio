@@ -6,17 +6,19 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameResult : MonoBehaviour
 {
     public static GameResult Instance;
+    [SerializeField] AudioSource[] gameResultSFX;
     [SerializeField] GameObject gameResultMenu;
+    [SerializeField] GameObject[] gameResultMenuOverlays;
     [SerializeField] SpriteRenderer resultImage;
     public Sprite[] resultSprites;
     [SerializeField] GameObject pauseButton;
     [SerializeField] GameObject birds;
     
-    static bool gamePassed;
     public int wormsHit;
     public int totalWorms;
     public int highestCombo;
@@ -27,18 +29,41 @@ public class GameResult : MonoBehaviour
         Instance = this;
         gameResultMenu.SetActive(false);
     }
+
+    
     
     public void EndLevel(bool pass)
     {
-        pauseButton.SetActive(false);
-        gameResultMenu.SetActive(true);
-        Time.timeScale = 0;
-        MusicManager.Instance.musicAudioSource.Pause();
-
+        MusicManager.Instance.musicAudioSource.Stop();
+        StartCoroutine(PlaySfx(pass));
+    }
+    
+    IEnumerator PlaySfx(bool pass)
+    {
         foreach (var bird in birds.GetComponentsInChildren<BoxCollider2D>())
             bird.enabled = false;
-
-        gamePassed = pass;
+        
+        gameResultSFX[pass ? 1 : 0].Play();
+        yield return new WaitForSeconds(3);
+        OpenGameResult(pass);
+    }
+    
+    public void OpenGameResult(bool pass)
+    {
+        if (pass)
+        {
+            gameResultMenuOverlays[0].SetActive(false);
+            resultImage.sprite = Instance.resultSprites[1];
+        }
+        else
+        {
+            gameResultMenuOverlays[1].SetActive(false);
+            resultImage.sprite = Instance.resultSprites[0];
+        }
+        
+        gameResultMenu.SetActive(true);
+        Time.timeScale = 0;
+        
         SaveHighscore();
     }
 
@@ -58,7 +83,6 @@ public class GameResult : MonoBehaviour
     void DisplayStats(bool newHighscore)
     {
         highestCombo = (highestCombo == 0 ? highestCombo = ScoreManager.comboScore : highestCombo);
-        resultImage.sprite = Instance.resultSprites[(!gamePassed ? 0 : 1)];
         Instance.gameResultMenu.GetComponentInChildren<TextMeshPro>().text = $"Hitrate: {(int)Math.Round((double)(100 * wormsHit) / totalWorms)}%";
     }
 
