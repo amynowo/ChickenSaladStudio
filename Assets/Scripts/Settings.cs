@@ -25,6 +25,7 @@ public class Settings : MonoBehaviour
     {
         PlayerPrefs.SetFloat("MusicVolume", value);
         audioMixer.SetFloat("Music", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
+        audioMixer.SetFloat("Theme", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
     }
 
     public void HomeButton()

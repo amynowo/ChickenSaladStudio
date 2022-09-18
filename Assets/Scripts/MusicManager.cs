@@ -33,6 +33,7 @@ public class MusicManager : MonoBehaviour
     void Start()
     {
         audioMixer.SetFloat("Music", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
+        audioMixer.SetFloat("Theme", -80);
         Instance = this;
         StartCoroutine(nameof(ReadFromFile));
     }

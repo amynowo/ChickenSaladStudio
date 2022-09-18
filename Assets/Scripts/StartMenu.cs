@@ -7,20 +7,20 @@ using UnityEngine.SceneManagement;
 public class StartMenu : MonoBehaviour
 {
     [SerializeField] private AudioMixer audioMixer;
-    
-    void Awake()
+
+    // Start is called before the first frame update
+    void Start()
     {
         if (!PlayerPrefs.HasKey("MusicVolume"))
         {
             PlayerPrefs.SetFloat("MusicVolume", 0.75f);
             audioMixer.SetFloat("Music", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
+            audioMixer.SetFloat("Theme", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
         }
-    }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+        {
+            audioMixer.SetFloat("Music", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
+            audioMixer.SetFloat("Theme", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
+        }
     }
     
     public void StartGame()

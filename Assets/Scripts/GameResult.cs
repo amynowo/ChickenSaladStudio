@@ -5,12 +5,14 @@ using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameResult : MonoBehaviour
 {
     public static GameResult Instance;
+    [SerializeField] private AudioMixer audioMixer;
     [SerializeField] AudioSource[] gameResultSFX;
     [SerializeField] GameObject gameResultMenu;
     [SerializeField] GameObject[] gameResultMenuOverlays;
@@ -50,6 +52,7 @@ public class GameResult : MonoBehaviour
     
     public void OpenGameResult(bool pass)
     {
+        audioMixer.SetFloat("Theme", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
         if (pass)
         {
             gameResultMenuOverlays[0].SetActive(false);

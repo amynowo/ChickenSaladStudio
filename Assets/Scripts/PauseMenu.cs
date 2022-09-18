@@ -21,6 +21,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(true);
         Time.timeScale = 0;
         MusicManager.Instance.musicAudioSource.Pause();
+        audioMixer.SetFloat("Theme", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
         SetMusicVolumeSlider();
         foreach (var bird in birds.GetComponentsInChildren<SpriteRenderer>())
             bird.sortingOrder = 1;
@@ -36,6 +37,7 @@ public class PauseMenu : MonoBehaviour
     {
         PlayerPrefs.SetFloat("MusicVolume", value);
         audioMixer.SetFloat("Music", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
+        audioMixer.SetFloat("Theme", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
     }
 
     public void Continue()
@@ -47,6 +49,7 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         pauseButton.SetActive(true);
         Time.timeScale = 1;
+        audioMixer.SetFloat("Theme", -80);
         MusicManager.Instance.musicAudioSource.UnPause();
     }
 
