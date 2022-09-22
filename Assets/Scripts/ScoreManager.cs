@@ -13,6 +13,7 @@ public class ScoreManager : MonoBehaviour
     public static int comboScore;
     
     public bool[] laneCheck;
+    private bool gameFinished = false;
     
     // Start is called before the first frame update
     void Start()
@@ -43,9 +44,10 @@ public class ScoreManager : MonoBehaviour
 
     void CheckGameOver()
     {
-        if (laneCheck.All(x => x))
+        if (!gameFinished && laneCheck.All(x => x) && GameResult.Instance.totalWorms > 0)
         {
-            Invoke(nameof(FinishGame), 2);
+            gameFinished = true;
+            Invoke(nameof(FinishGame), 1.5f);
         }
     }
     

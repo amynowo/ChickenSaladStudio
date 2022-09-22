@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement; // to get back to main menu scene
 using System;
+using TMPro;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
@@ -14,6 +15,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private Slider musicVolumeSlider;
     [SerializeField] GameObject birds;
     [SerializeField] GameObject branch;
+    [SerializeField] TextMeshProUGUI countdownText;
     
     public void Pause()
     {
@@ -46,10 +48,33 @@ public class PauseMenu : MonoBehaviour
             bird.sortingOrder = 5;
         branch.GetComponent<SpriteRenderer>().sortingOrder = 4;
         
+        audioMixer.SetFloat("Theme", -80);
         pauseMenu.SetActive(false);
         pauseButton.SetActive(true);
         Time.timeScale = 1;
-        audioMixer.SetFloat("Theme", -80);
+        countdownText.gameObject.SetActive(true);
+        
+        StartCoroutine(nameof(StartCountdown));
+    }
+    
+    IEnumerator StartCountdown()
+    {
+        int countdownTime = 3;
+        while (countdownTime > 0)
+        {
+            countdownText.text = countdownTime.ToString();
+            yield return new WaitForSeconds(1f);
+            countdownTime--;
+        }
+        countdownText.text = "GO";
+        yield return new WaitForSeconds(1f);
+        
+        ReturnToGame();
+    }
+
+    void ReturnToGame()
+    {
+        countdownText.gameObject.SetActive(false);
         MusicManager.Instance.musicAudioSource.UnPause();
     }
 

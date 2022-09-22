@@ -13,7 +13,8 @@ public class GameResult : MonoBehaviour
 {
     public static GameResult Instance;
     [SerializeField] private AudioMixer audioMixer;
-    [SerializeField] AudioSource[] gameResultSFX;
+    [SerializeField] AudioSource gameResultFailSFX;
+    [SerializeField] AudioSource gameResultPassSFX;
     [SerializeField] GameObject gameResultMenu;
     [SerializeField] GameObject[] gameResultMenuOverlays;
     [SerializeField] SpriteRenderer resultImage;
@@ -32,8 +33,6 @@ public class GameResult : MonoBehaviour
         gameResultMenu.SetActive(false);
     }
 
-    
-    
     public void EndLevel(bool pass)
     {
         MusicManager.Instance.musicAudioSource.Stop();
@@ -45,7 +44,11 @@ public class GameResult : MonoBehaviour
         foreach (var bird in birds.GetComponentsInChildren<BoxCollider2D>())
             bird.enabled = false;
         
-        gameResultSFX[pass ? 1 : 0].Play();
+        if (pass)
+            gameResultPassSFX.Play();
+        else
+            gameResultFailSFX.Play();
+
         yield return new WaitForSeconds(3);
         OpenGameResult(pass);
     }
