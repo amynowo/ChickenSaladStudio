@@ -22,7 +22,7 @@ public class PauseMenu : MonoBehaviour
         pauseButton.SetActive(false);
         pauseMenu.SetActive(true);
         Time.timeScale = 0;
-        MusicManager.Instance.musicAudioSource.Pause();
+        LevelManager.Instance.musicAudioSource.Pause();
         audioMixer.SetFloat("Theme", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
         SetMusicVolumeSlider();
         foreach (var bird in birds.GetComponentsInChildren<SpriteRenderer>())
@@ -75,7 +75,7 @@ public class PauseMenu : MonoBehaviour
     void ReturnToGame()
     {
         countdownText.gameObject.SetActive(false);
-        MusicManager.Instance.musicAudioSource.UnPause();
+        LevelManager.Instance.musicAudioSource.UnPause();
     }
 
     public void Home()

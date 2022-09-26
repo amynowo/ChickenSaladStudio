@@ -28,7 +28,7 @@ public class Settings : MonoBehaviour
         audioMixer.SetFloat("Theme", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
     }
 
-    public void HomeButton()
+    public void Home()
     {
         SceneManager.LoadScene("StartScene");
     }

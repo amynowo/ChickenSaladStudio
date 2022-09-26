@@ -25,7 +25,7 @@ public class StartMenu : MonoBehaviour
     
     public void StartGame()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("LevelSelectScene");
     }
     
     public void OpenSettings()

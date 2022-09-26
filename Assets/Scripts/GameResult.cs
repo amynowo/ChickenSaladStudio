@@ -35,7 +35,8 @@ public class GameResult : MonoBehaviour
 
     public void EndLevel(bool pass)
     {
-        MusicManager.Instance.musicAudioSource.Stop();
+        pauseButton.SetActive(false);
+        LevelManager.Instance.musicAudioSource.Stop();
         StartCoroutine(PlaySfx(pass));
     }
     

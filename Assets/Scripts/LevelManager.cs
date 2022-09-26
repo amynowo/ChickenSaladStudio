@@ -7,18 +7,22 @@ using System.IO;
 using Unity.VisualScripting;
 using UnityEngine.Audio;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
-public class MusicManager : MonoBehaviour
+public class LevelManager : MonoBehaviour
 {
-    public static MusicManager Instance;
+    public static LevelManager Instance;
+    public SpriteRenderer backgroundImageObject;
+    public Sprite[] backgroundImages;
     [SerializeField] private AudioMixer audioMixer;
     public AudioSource musicAudioSource;
+    public AudioClip[] audioClips;
     public Lane[] lanes;
     public float songDelaySeconds;
     public double errorMargin; // in seconds
     public int inputDelayMilliseconds;
 
-    public string fileName;
+    //public string fileName;
     public float wormTime;
     public float wormSpawnY;
     public float wormTapY;
@@ -34,12 +38,17 @@ public class MusicManager : MonoBehaviour
     {
         audioMixer.SetFloat("Music", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
         audioMixer.SetFloat("Theme", -80);
+        musicAudioSource.clip = audioClips[GlobalVariables.currentLevel - 1];
+
+        backgroundImageObject.sprite = backgroundImages[GlobalVariables.currentLevel - 1];
+        
         Instance = this;
         StartCoroutine(nameof(ReadFromFile));
     }
 
     IEnumerator ReadFromFile()
     {
+        string fileName = $"lvl_{GlobalVariables.currentLevel}.mid";
         var filePath = Path.Combine(Application.streamingAssetsPath, fileName);
         var persistentFilePath = Path.Combine(Application.persistentDataPath, "MIDI", fileName);
         byte[] midiByteData;
