@@ -1432,6 +1432,7 @@ GameObject:
   - component: {fileID: 568332585}
   - component: {fileID: 568332589}
   - component: {fileID: 568332588}
+  - component: {fileID: 568332590}
   m_Layer: 0
   m_Name: Bird3
   m_TagString: Untagged
@@ -1549,6 +1550,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.4}
   m_EdgeRadius: 0
+--- !u!95 &568332590
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568332584}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ca1434f26fd40184eb5d4ff976d43b8f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &572730419
 GameObject:
   m_ObjectHideFlags: 0
@@ -2848,6 +2869,7 @@ GameObject:
   - component: {fileID: 916927005}
   - component: {fileID: 916927009}
   - component: {fileID: 916927008}
+  - component: {fileID: 916927010}
   m_Layer: 0
   m_Name: Bird4
   m_TagString: Untagged
@@ -2965,6 +2987,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.4}
   m_EdgeRadius: 0
+--- !u!95 &916927010
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916927004}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 01078206341867347aa23e4aca3debc7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &989268186
 GameObject:
   m_ObjectHideFlags: 0
@@ -4913,6 +4955,7 @@ GameObject:
   - component: {fileID: 1738208946}
   - component: {fileID: 1738208950}
   - component: {fileID: 1738208949}
+  - component: {fileID: 1738208951}
   m_Layer: 0
   m_Name: Bird2
   m_TagString: Untagged
@@ -5030,6 +5073,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.4}
   m_EdgeRadius: 0
+--- !u!95 &1738208951
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738208945}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4cf433b1abf816c4690883c9d256e9fc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1762950358
 GameObject:
   m_ObjectHideFlags: 0
