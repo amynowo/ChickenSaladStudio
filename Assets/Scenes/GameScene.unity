@@ -4491,6 +4491,11 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 022ccbe2721bef649bb56c5e5963394c, type: 2}
   gameResultFailSFX: {fileID: 584112446}
   gameResultPassSFX: {fileID: 1323529618}
+  birdAnimators:
+  - {fileID: 1814483572}
+  - {fileID: 1738208951}
+  - {fileID: 568332590}
+  - {fileID: 916927010}
   gameResultMenu: {fileID: 506497232}
   gameResultMenuOverlays:
   - {fileID: 1316430258}

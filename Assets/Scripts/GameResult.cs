@@ -15,6 +15,8 @@ public class GameResult : MonoBehaviour
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] AudioSource gameResultFailSFX;
     [SerializeField] AudioSource gameResultPassSFX;
+    public Animator[] birdAnimators;
+    
     [SerializeField] GameObject gameResultMenu;
     [SerializeField] GameObject[] gameResultMenuOverlays;
     [SerializeField] SpriteRenderer resultImage;
@@ -45,11 +47,24 @@ public class GameResult : MonoBehaviour
     {
         foreach (var bird in birds.GetComponentsInChildren<BoxCollider2D>())
             bird.enabled = false;
-        
+
         if (pass)
+        {
+            foreach (var birdAnimator in birdAnimators)
+                birdAnimator.SetTrigger("Pass");
+
             gameResultPassSFX.Play();
+        }
         else
+        {
+            foreach (var birdAnimator in birdAnimators)
+            {
+                birdAnimator.SetBool("Fail", true);
+                birdAnimator.SetTrigger("FruitMissed");
+            }
+
             gameResultFailSFX.Play();
+        }
 
         yield return new WaitForSeconds(3);
         OpenGameResult(pass);
@@ -70,7 +85,6 @@ public class GameResult : MonoBehaviour
         }
         
         gameResultMenu.SetActive(true);
-        Time.timeScale = 0;
         
         SaveHighscore();
     }

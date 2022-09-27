@@ -26,7 +26,6 @@ public class ScoreManager : MonoBehaviour
         }
     }
     
-    
     public static void Hit()
     {
         wormsHit++;

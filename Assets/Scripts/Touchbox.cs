@@ -18,12 +18,7 @@ public class Touchbox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-    }
-
-    IEnumerator BirdDelay()
-    {
-        yield return new WaitForSeconds(0.25f);
-        birdSpriteRender.sprite = birdSprites[0];
+        
     }
 
     // Update is called once per frame
@@ -33,31 +28,25 @@ public class Touchbox : MonoBehaviour
         {
             if (Input.touchCount > 0 && Input.GetTouch(0).phase is TouchPhase.Began or TouchPhase.Stationary or TouchPhase.Moved)
             {
-                birdAnimator.SetBool("Eat", true);
                 var wp = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
                 var touchPosition = new Vector2(wp.x, wp.y);
  
                 if (GetComponent<BoxCollider2D>() == Physics2D.OverlapPoint(touchPosition))
                 {
-                    birdSpriteRender.sprite = birdSprites[1];
+                    birdAnimator.SetBool("Eat", true);
+                    //birdSpriteRender.sprite = birdSprites[1];
                     currentLane = laneNumber;
                 }
                 else if (GetComponent<BoxCollider2D>() != Physics2D.OverlapPoint(touchPosition))
                 {
-                    birdSpriteRender.sprite = birdSprites[0];
+                    birdAnimator.SetBool("Eat", false);
+                    //birdSpriteRender.sprite = birdSprites[0];
                 }
             }
             else if (Input.touchCount > 0 && Input.GetTouch(0).phase is TouchPhase.Ended)
             {
                 birdAnimator.SetBool("Eat", false);
-                //StartCoroutine(nameof(BirdDelay));
-                
-                //Debug.Log($"Let go of bird {currentLane}");
             }
-            /*else
-            {
-                birdSpriteRender.sprite = birdSprites[0];
-            }*/
         }
     }
 }
