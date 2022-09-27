@@ -9,7 +9,8 @@ public class Lane : MonoBehaviour
 
     [Range(1, 4)]
     public int laneNumber;
-    
+
+    public Animator birdAnimator;
     public GameObject wormPrefab;
     List<Worm> worms = new List<Worm>();
     public List<double> timeStamps = new List<double>();
@@ -68,6 +69,7 @@ public class Lane : MonoBehaviour
                 {
                     // Tap on worm
                     Hit();
+                    birdAnimator.SetTrigger("FruitCaught");
                     Destroy(worms[inputIndex].gameObject);
                     inputIndex++;
                 }
@@ -82,6 +84,7 @@ public class Lane : MonoBehaviour
             {
                 // Missed worm
                 Miss();
+                birdAnimator.SetTrigger("FruitMissed");
                 inputIndex++;
             }
         }

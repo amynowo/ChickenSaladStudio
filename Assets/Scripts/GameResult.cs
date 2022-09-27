@@ -19,6 +19,7 @@ public class GameResult : MonoBehaviour
     [SerializeField] GameObject[] gameResultMenuOverlays;
     [SerializeField] SpriteRenderer resultImage;
     public Sprite[] resultSprites;
+    [SerializeField] TextMeshProUGUI statistics;
     [SerializeField] GameObject pauseButton;
     [SerializeField] GameObject birds;
     
@@ -90,7 +91,7 @@ public class GameResult : MonoBehaviour
     void DisplayStats(bool newHighscore)
     {
         highestCombo = (highestCombo == 0 ? highestCombo = ScoreManager.comboScore : highestCombo);
-        Instance.gameResultMenu.GetComponentInChildren<TextMeshPro>().text = $"Hitrate: {(int)Math.Round((double)(100 * wormsHit) / totalWorms)}%";
+        statistics.text = $"hitrate: {(int)Math.Round((double)(100 * wormsHit) / totalWorms)}%";
     }
 
     public void ResetStats()

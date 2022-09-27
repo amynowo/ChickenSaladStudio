@@ -1523,6 +1523,7 @@ MonoBehaviour:
   birdSprites:
   - {fileID: 21300000, guid: 1dc0110bc5937284f991044afdf3a668, type: 3}
   - {fileID: 21300000, guid: a39439f7ab7e3304486835a47894272e, type: 3}
+  birdAnimator: {fileID: 568332590}
   laneNumber: 3
 --- !u!61 &568332589
 BoxCollider2D:
@@ -2259,6 +2260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noteRestriction: 0
   laneNumber: 1
+  birdAnimator: {fileID: 1814483572}
   wormPrefab: {fileID: 192125633299985278, guid: 51a606f3d660d814e8e7884d1e206d91, type: 3}
   timeStamps: []
 --- !u!4 &704003512
@@ -2960,6 +2962,7 @@ MonoBehaviour:
   birdSprites:
   - {fileID: 21300000, guid: 93a4a3fc12959b340ac94e227925f1b3, type: 3}
   - {fileID: 21300000, guid: 9ddb217fb9830934abfc2caa5dadc8dd, type: 3}
+  birdAnimator: {fileID: 916927010}
   laneNumber: 4
 --- !u!61 &916927009
 BoxCollider2D:
@@ -4496,6 +4499,7 @@ MonoBehaviour:
   resultSprites:
   - {fileID: 21300000, guid: e0141e93db6cd7341a9ad334108e1c08, type: 3}
   - {fileID: 21300000, guid: 2b30831aa33d08a4a91d45ae3c2079ad, type: 3}
+  statistics: {fileID: 989268188}
   pauseButton: {fileID: 1289047908}
   birds: {fileID: 194580327}
   wormsHit: 0
@@ -5046,6 +5050,7 @@ MonoBehaviour:
   birdSprites:
   - {fileID: 21300000, guid: 5698caf565699234a9dcc14e50b1c078, type: 3}
   - {fileID: 21300000, guid: dc454e89aadafa443b8bf3751a50b224, type: 3}
+  birdAnimator: {fileID: 1738208951}
   laneNumber: 2
 --- !u!61 &1738208950
 BoxCollider2D:
@@ -5124,6 +5129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noteRestriction: 2
   laneNumber: 3
+  birdAnimator: {fileID: 568332590}
   wormPrefab: {fileID: 192125633299985278, guid: 51a606f3d660d814e8e7884d1e206d91, type: 3}
   timeStamps: []
 --- !u!4 &1762950360
@@ -5244,6 +5250,7 @@ MonoBehaviour:
   birdSprites:
   - {fileID: 21300000, guid: 492132e16893484449180303450b7caf, type: 3}
   - {fileID: 21300000, guid: 9e52a7dac82e6ba48b5209d6d7f0caa6, type: 3}
+  birdAnimator: {fileID: 1814483572}
   laneNumber: 1
 --- !u!61 &1814483571
 BoxCollider2D:
@@ -5455,6 +5462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noteRestriction: 1
   laneNumber: 2
+  birdAnimator: {fileID: 1738208951}
   wormPrefab: {fileID: 192125633299985278, guid: 51a606f3d660d814e8e7884d1e206d91, type: 3}
   timeStamps: []
 --- !u!4 &1994998896
@@ -5579,6 +5587,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noteRestriction: 3
   laneNumber: 4
+  birdAnimator: {fileID: 916927010}
   wormPrefab: {fileID: 192125633299985278, guid: 51a606f3d660d814e8e7884d1e206d91, type: 3}
   timeStamps: []
 --- !u!4 &2026156772

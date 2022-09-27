@@ -8,6 +8,8 @@ public class Touchbox : MonoBehaviour
     public SpriteRenderer birdSpriteRender;
     public Sprite[] birdSprites;
     
+    public Animator birdAnimator;
+    
     [Range(1, 4)]
     public int laneNumber;
 
@@ -31,6 +33,7 @@ public class Touchbox : MonoBehaviour
         {
             if (Input.touchCount > 0 && Input.GetTouch(0).phase is TouchPhase.Began or TouchPhase.Stationary or TouchPhase.Moved)
             {
+                birdAnimator.SetBool("Eat", true);
                 var wp = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
                 var touchPosition = new Vector2(wp.x, wp.y);
  
@@ -46,7 +49,8 @@ public class Touchbox : MonoBehaviour
             }
             else if (Input.touchCount > 0 && Input.GetTouch(0).phase is TouchPhase.Ended)
             {
-                StartCoroutine(nameof(BirdDelay));
+                birdAnimator.SetBool("Eat", false);
+                //StartCoroutine(nameof(BirdDelay));
                 
                 //Debug.Log($"Let go of bird {currentLane}");
             }
