@@ -11,14 +11,14 @@ public class Worm : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timeInstantiated = MusicManager.Instance.GetAudioSourceTime();
+        timeInstantiated = LevelManager.Instance.GetAudioSourceTime();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        double timeSinceInstantiated = MusicManager.Instance.GetAudioSourceTime() - timeInstantiated;
-        float t = (float)(timeSinceInstantiated / (MusicManager.Instance.wormTime * 2));
+        double timeSinceInstantiated = LevelManager.Instance.GetAudioSourceTime() - timeInstantiated;
+        float t = (float)(timeSinceInstantiated / (LevelManager.Instance.wormTime * 2));
 
         GetComponent<SpriteRenderer>().enabled = true;
         if (t > 1)
@@ -27,7 +27,7 @@ public class Worm : MonoBehaviour
         }
         else
         {
-            transform.localPosition = Vector3.Lerp(Vector3.up * MusicManager.Instance.wormSpawnY, Vector3.up * MusicManager.Instance.wormDespawnY, t); 
+            transform.localPosition = Vector3.Lerp(Vector3.up * LevelManager.Instance.wormSpawnY, Vector3.up * LevelManager.Instance.wormDespawnY, t); 
             GetComponent<SpriteRenderer>().enabled = true;
         }
     }

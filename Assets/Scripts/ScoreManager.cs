@@ -1,4 +1,5 @@
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
@@ -6,12 +7,13 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance;
     public AudioSource hitSFX;
     public AudioSource missSFX;
-    public TMPro.TextMeshPro scoreText;
+    //public TMPro.TextMeshPro scoreText;
     public static GameObject[] strikeObjects;
     public static int wormsHit;
     public static int comboScore;
     
     public bool[] laneCheck;
+    private bool gameFinished = false;
     
     // Start is called before the first frame update
     void Start()
@@ -42,9 +44,10 @@ public class ScoreManager : MonoBehaviour
 
     void CheckGameOver()
     {
-        if (laneCheck.All(x => x))
+        if (!gameFinished && laneCheck.All(x => x) && GameResult.Instance.totalWorms > 0)
         {
-            Invoke(nameof(FinishGame), 2);
+            gameFinished = true;
+            Invoke(nameof(FinishGame), 1.5f);
         }
     }
     
@@ -57,7 +60,7 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = wormsHit.ToString();
+        GetComponent<TextMeshPro>().text = wormsHit.ToString();
         CheckGameOver();
     }
 }

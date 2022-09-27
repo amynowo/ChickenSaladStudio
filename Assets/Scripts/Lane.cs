@@ -30,7 +30,7 @@ public class Lane : MonoBehaviour
         {
             if (note.NoteName == noteRestriction)
             {
-                var metricTimeSpan = TimeConverter.ConvertTo<MetricTimeSpan>(note.Time, MusicManager.Instance.midiFile.GetTempoMap());
+                var metricTimeSpan = TimeConverter.ConvertTo<MetricTimeSpan>(note.Time, LevelManager.Instance.midiFile.GetTempoMap());
                 timeStamps.Add((double)metricTimeSpan.Minutes * 60f + metricTimeSpan.Seconds + (double)metricTimeSpan.Milliseconds / 1000f);
             }
         }
@@ -42,7 +42,7 @@ public class Lane : MonoBehaviour
     {
         if (spawnIndex < timeStamps.Count)
         {
-            if (MusicManager.Instance.GetAudioSourceTime() >= timeStamps[spawnIndex] - MusicManager.Instance.wormTime)
+            if (LevelManager.Instance.GetAudioSourceTime() >= timeStamps[spawnIndex] - LevelManager.Instance.wormTime)
             {
                 // Inistantiating a worm and adding it to the list of worms
                 var worm = Instantiate(wormPrefab, transform);
@@ -59,8 +59,8 @@ public class Lane : MonoBehaviour
         if (inputIndex < timeStamps.Count)
         {
             double timeStamp = timeStamps[inputIndex];
-            double marginOfError = MusicManager.Instance.errorMargin;
-            double audioTime = MusicManager.Instance.GetAudioSourceTime() - (MusicManager.Instance.inputDelayMilliseconds / 1000.0);
+            double marginOfError = LevelManager.Instance.errorMargin;
+            double audioTime = LevelManager.Instance.GetAudioSourceTime() - (LevelManager.Instance.inputDelayMilliseconds / 1000.0);
             
             if (Touchbox.currentLane == laneNumber)
             {
@@ -102,6 +102,6 @@ public class Lane : MonoBehaviour
     {
         GameResult.Instance.totalWorms++;
         ScoreManager.Miss();
-        StrikeManager.Instance.AddStrike();
+        LifeManager.Instance.RemoveLife();
     }
 }

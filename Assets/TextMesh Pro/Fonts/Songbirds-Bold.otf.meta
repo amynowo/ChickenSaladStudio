@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 42d19d26d39f0e146a793bbab8f5115e
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Songbirds
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: ed6122125b8447945b9949cb70258ac2, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
