@@ -11,12 +11,11 @@ public class GlobalVariables : MonoBehaviour
 {
     private bool notFirstObject = false;
 
-    public static Dictionary<int, bool> levels = new() { { 1, true }, { 2, true }, { 3, true }, { 4, true } };
+    public static Dictionary<int, bool> levels = new() { { 1, true }, { 2, true }, { 3, true }, { 4, true }, { 5, true } };
     public static int currentLevel = 1;
-
+    
     private IEnumerator Start()
     {
-        Debug.Log("Start");
         StartCoroutine(nameof(LoadMidiFiles));
         yield break;
     }

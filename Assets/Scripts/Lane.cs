@@ -16,7 +16,7 @@ public class Lane : MonoBehaviour
     public List<double> timeStamps = new List<double>();
     
     int spawnIndex = 0;
-    int inputIndex = 0;
+    public int inputIndex = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -63,7 +63,7 @@ public class Lane : MonoBehaviour
             double marginOfError = LevelManager.Instance.errorMargin;
             double audioTime = LevelManager.Instance.GetAudioSourceTime() - (LevelManager.Instance.inputDelayMilliseconds / 1000.0);
             
-            if (Touchbox.currentLane == laneNumber)
+            if (Touchbox.currentLane == laneNumber && Touchbox.currentIndex == inputIndex)
             {
                 if (Math.Abs(audioTime - timeStamp) < marginOfError)
                 {
@@ -78,7 +78,9 @@ public class Lane : MonoBehaviour
                     // Tap on no worm
                     //Miss();
                 }
+                
                 Touchbox.currentLane = 0;
+                Touchbox.currentIndex = 0;
             }
             if (timeStamp + marginOfError <= audioTime)
             {

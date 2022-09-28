@@ -1523,12 +1523,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef9cbd49e4992947bac5447e36714a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  birdSpriteRender: {fileID: 568332585}
-  birdSprites:
-  - {fileID: 21300000, guid: 1dc0110bc5937284f991044afdf3a668, type: 3}
-  - {fileID: 21300000, guid: a39439f7ab7e3304486835a47894272e, type: 3}
   birdAnimator: {fileID: 568332590}
   laneNumber: 3
+  lane: {fileID: 1762950359}
 --- !u!61 &568332589
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2264,9 +2261,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noteRestriction: 0
   laneNumber: 1
+  touchBox: {fileID: 1814483570}
   birdAnimator: {fileID: 1814483572}
   wormPrefab: {fileID: 192125633299985278, guid: 51a606f3d660d814e8e7884d1e206d91, type: 3}
   timeStamps: []
+  inputIndex: 0
 --- !u!4 &704003512
 Transform:
   m_ObjectHideFlags: 0
@@ -2962,12 +2961,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef9cbd49e4992947bac5447e36714a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  birdSpriteRender: {fileID: 916927005}
-  birdSprites:
-  - {fileID: 21300000, guid: 93a4a3fc12959b340ac94e227925f1b3, type: 3}
-  - {fileID: 21300000, guid: 9ddb217fb9830934abfc2caa5dadc8dd, type: 3}
   birdAnimator: {fileID: 916927010}
   laneNumber: 4
+  lane: {fileID: 2026156771}
 --- !u!61 &916927009
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5055,12 +5051,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef9cbd49e4992947bac5447e36714a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  birdSpriteRender: {fileID: 1738208946}
-  birdSprites:
-  - {fileID: 21300000, guid: 5698caf565699234a9dcc14e50b1c078, type: 3}
-  - {fileID: 21300000, guid: dc454e89aadafa443b8bf3751a50b224, type: 3}
   birdAnimator: {fileID: 1738208951}
   laneNumber: 2
+  lane: {fileID: 1994998895}
 --- !u!61 &1738208950
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5138,9 +5131,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noteRestriction: 2
   laneNumber: 3
+  touchBox: {fileID: 568332588}
   birdAnimator: {fileID: 568332590}
   wormPrefab: {fileID: 192125633299985278, guid: 51a606f3d660d814e8e7884d1e206d91, type: 3}
   timeStamps: []
+  inputIndex: 0
 --- !u!4 &1762950360
 Transform:
   m_ObjectHideFlags: 0
@@ -5255,12 +5250,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef9cbd49e4992947bac5447e36714a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  birdSpriteRender: {fileID: 1814483567}
-  birdSprites:
-  - {fileID: 21300000, guid: 492132e16893484449180303450b7caf, type: 3}
-  - {fileID: 21300000, guid: 9e52a7dac82e6ba48b5209d6d7f0caa6, type: 3}
   birdAnimator: {fileID: 1814483572}
   laneNumber: 1
+  lane: {fileID: 704003511}
 --- !u!61 &1814483571
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5471,9 +5463,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noteRestriction: 1
   laneNumber: 2
+  touchBox: {fileID: 1738208949}
   birdAnimator: {fileID: 1738208951}
   wormPrefab: {fileID: 192125633299985278, guid: 51a606f3d660d814e8e7884d1e206d91, type: 3}
   timeStamps: []
+  inputIndex: 0
 --- !u!4 &1994998896
 Transform:
   m_ObjectHideFlags: 0
@@ -5596,9 +5590,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noteRestriction: 3
   laneNumber: 4
+  touchBox: {fileID: 916927008}
   birdAnimator: {fileID: 916927010}
   wormPrefab: {fileID: 192125633299985278, guid: 51a606f3d660d814e8e7884d1e206d91, type: 3}
   timeStamps: []
+  inputIndex: 0
 --- !u!4 &2026156772
 Transform:
   m_ObjectHideFlags: 0
