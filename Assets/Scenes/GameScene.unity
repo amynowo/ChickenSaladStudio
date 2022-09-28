@@ -499,11 +499,15 @@ MonoBehaviour:
   backgroundImages:
   - {fileID: 21300000, guid: c86536483a9b796458dee4f46377c7dd, type: 3}
   - {fileID: 21300000, guid: 51fe3d42a3ef12c42b525326ace7d2c5, type: 3}
+  - {fileID: 21300000, guid: ea3623dbf00018942bd5af2bc3be5a6a, type: 3}
+  - {fileID: 21300000, guid: 805b618c8b948a145a8976f205b68d5d, type: 3}
   audioMixer: {fileID: 24100000, guid: 022ccbe2721bef649bb56c5e5963394c, type: 2}
   musicAudioSource: {fileID: 1077018523}
   audioClips:
   - {fileID: 8300000, guid: dcd80e36b5e79a44abe41313407c3943, type: 3}
   - {fileID: 8300000, guid: e1aad08d1a196144697e1970990a6212, type: 3}
+  - {fileID: 8300000, guid: c7efa56974f5d3d49b21abaabce00a65, type: 3}
+  - {fileID: 8300000, guid: 6718a6f411e351b4f90254bddb6ce3d1, type: 3}
   lanes:
   - {fileID: 704003511}
   - {fileID: 1994998895}

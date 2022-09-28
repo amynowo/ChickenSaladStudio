@@ -43,46 +43,20 @@ public class LevelManager : MonoBehaviour
         backgroundImageObject.sprite = backgroundImages[GlobalVariables.currentLevel - 1];
         
         Instance = this;
-        StartCoroutine(nameof(ReadFromFile));
+        GetDataFromMidi();
     }
-
-    IEnumerator ReadFromFile()
+    
+    public void GetDataFromMidi()
     {
         string fileName = $"lvl_{GlobalVariables.currentLevel}.mid";
         var filePath = Path.Combine(Application.streamingAssetsPath, fileName);
         var persistentFilePath = Path.Combine(Application.persistentDataPath, "MIDI", fileName);
-        byte[] midiByteData;
-
+        
         if (filePath.Contains("://") || filePath.Contains(":///"))
-        {
-            if (Directory.Exists(Path.Combine(Application.persistentDataPath, "MIDI")))
-            {
-                midiFile = MidiFile.Read(persistentFilePath);
-            }
-            else
-            {
-                using (UnityWebRequest request = UnityWebRequest.Get(filePath))
-                {
-                    yield return request.SendWebRequest();
-                    midiByteData = request.downloadHandler.data;
-                }
-
-                Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, "MIDI"));
-                File.WriteAllBytes(persistentFilePath, midiByteData);
-                
-                midiFile = MidiFile.Read(persistentFilePath);
-            }
-        }
+            midiFile = MidiFile.Read(persistentFilePath);
         else
-        {
             midiFile = MidiFile.Read(filePath);
-        }
-
-        GetDataFromMidi();
-    }
-
-    public void GetDataFromMidi()
-    {
+        
         var notes = midiFile.GetNotes();
         var array = new Note[notes.Count];
         notes.CopyTo(array, 0);
@@ -102,7 +76,6 @@ public class LevelManager : MonoBehaviour
     {
         return (double)musicAudioSource.timeSamples / musicAudioSource.clip.frequency;
     }
-    
 
     // Update is called once per frame
     void FixedUpdate()
