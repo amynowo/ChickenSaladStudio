@@ -1,13 +1,8 @@
-using System;
-using System.Collections;
 using UnityEngine;
 using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Interaction;
 using System.IO;
-using Unity.VisualScripting;
 using UnityEngine.Audio;
-using UnityEngine.Networking;
-using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {

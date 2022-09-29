@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -19,9 +18,20 @@ public class StartMenu : MonoBehaviour
             audioMixer.SetFloat("Music", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
             audioMixer.SetFloat("Theme", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
         }
+        else
         {
             audioMixer.SetFloat("Music", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
             audioMixer.SetFloat("Theme", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
+        }
+
+        if (!PlayerPrefs.HasKey("VolumeMute"))
+        {
+            PlayerPrefs.SetInt("VolumeMute", 0);
+        }
+        else
+        {
+            bool volumeMute = PlayerPrefs.GetInt("VolumeMute") == 1;
+            audioMixer.SetFloat("Master", volumeMute ? -80.0f : 0.0f);
         }
     }
     
