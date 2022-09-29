@@ -27,6 +27,7 @@ public class StartMenu : MonoBehaviour
         if (!PlayerPrefs.HasKey("VolumeMute"))
         {
             PlayerPrefs.SetInt("VolumeMute", 0);
+            audioMixer.SetFloat("Master", 0.0f);
         }
         else
         {
@@ -38,6 +39,11 @@ public class StartMenu : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("LevelSelectScene");
+    }
+
+    public void OpenStore()
+    {
+        SceneManager.LoadScene("StoreScene");
     }
     
     public void OpenSettings()

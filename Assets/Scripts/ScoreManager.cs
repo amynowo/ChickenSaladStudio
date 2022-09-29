@@ -7,7 +7,7 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance;
     public AudioSource hitSFX;
     public AudioSource missSFX;
-    //public TMPro.TextMeshPro scoreText;
+    public TextMeshPro scoreText;
     public static GameObject[] strikeObjects;
     public static int wormsHit;
     public static int comboScore;
@@ -59,7 +59,7 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponent<TextMeshPro>().text = wormsHit.ToString();
+        scoreText.text = wormsHit.ToString();
         CheckGameOver();
     }
 }
