@@ -2239,7 +2239,16 @@ MonoBehaviour:
   noteRestriction: 0
   laneNumber: 1
   wormPrefab: {fileID: 2432519803512515327, guid: 5dccc4bcc3d160448a3510b3fd71f430, type: 3}
+  missDisplay: {fileID: 1924827369317930880, guid: bb9d92f607f2db34093557b9068dc64b, type: 3}
+  okAccDisplay: {fileID: 6952848178032732039, guid: 6dd4c9cf574035e4eaed6fe5f0fcd67d, type: 3}
+  goodAccDisplay: {fileID: 6622763168819045546, guid: 9d6578386b0029545a1b46ea74ff5673, type: 3}
+  perfecAcctDisplay: {fileID: 2561601398043504611, guid: a145bfb717738ce43b4a866821d6a7df, type: 3}
   timeStamps: []
+  noteOkAccRange1: 0.1
+  noteOkAccRange2: 0.2
+  noteGoodAccRange1: 0.05
+  noteGoodAccRange2: 0.1
+  notePerfectAccRange: 0.05
 --- !u!4 &704003512
 Transform:
   m_ObjectHideFlags: 0
@@ -5062,7 +5071,16 @@ MonoBehaviour:
   noteRestriction: 2
   laneNumber: 3
   wormPrefab: {fileID: 3326352254345750438, guid: a6d6539eecf437d469c9637dcc4a3906, type: 3}
+  missDisplay: {fileID: 1924827369317930880, guid: bb9d92f607f2db34093557b9068dc64b, type: 3}
+  okAccDisplay: {fileID: 6952848178032732039, guid: 6dd4c9cf574035e4eaed6fe5f0fcd67d, type: 3}
+  goodAccDisplay: {fileID: 6622763168819045546, guid: 9d6578386b0029545a1b46ea74ff5673, type: 3}
+  perfecAcctDisplay: {fileID: 2561601398043504611, guid: a145bfb717738ce43b4a866821d6a7df, type: 3}
   timeStamps: []
+  noteOkAccRange1: 0.1
+  noteOkAccRange2: 0.2
+  noteGoodAccRange1: 0.05
+  noteGoodAccRange2: 0.1
+  notePerfectAccRange: 0.05
 --- !u!4 &1762950360
 Transform:
   m_ObjectHideFlags: 0
@@ -5372,7 +5390,16 @@ MonoBehaviour:
   noteRestriction: 1
   laneNumber: 2
   wormPrefab: {fileID: 1098625078976677032, guid: 557a8c2c71fb1b842a0669b3b6ee4698, type: 3}
+  missDisplay: {fileID: 1924827369317930880, guid: bb9d92f607f2db34093557b9068dc64b, type: 3}
+  okAccDisplay: {fileID: 6952848178032732039, guid: 6dd4c9cf574035e4eaed6fe5f0fcd67d, type: 3}
+  goodAccDisplay: {fileID: 6622763168819045546, guid: 9d6578386b0029545a1b46ea74ff5673, type: 3}
+  perfecAcctDisplay: {fileID: 2561601398043504611, guid: a145bfb717738ce43b4a866821d6a7df, type: 3}
   timeStamps: []
+  noteOkAccRange1: 0.1
+  noteOkAccRange2: 0.2
+  noteGoodAccRange1: 0.05
+  noteGoodAccRange2: 0.1
+  notePerfectAccRange: 0.05
 --- !u!4 &1994998896
 Transform:
   m_ObjectHideFlags: 0
@@ -5496,7 +5523,16 @@ MonoBehaviour:
   noteRestriction: 3
   laneNumber: 4
   wormPrefab: {fileID: 8305849928966536419, guid: 405bdf2f94392114d950ba7570ac7dd4, type: 3}
+  missDisplay: {fileID: 1924827369317930880, guid: bb9d92f607f2db34093557b9068dc64b, type: 3}
+  okAccDisplay: {fileID: 6952848178032732039, guid: 6dd4c9cf574035e4eaed6fe5f0fcd67d, type: 3}
+  goodAccDisplay: {fileID: 6622763168819045546, guid: 9d6578386b0029545a1b46ea74ff5673, type: 3}
+  perfecAcctDisplay: {fileID: 2561601398043504611, guid: a145bfb717738ce43b4a866821d6a7df, type: 3}
   timeStamps: []
+  noteOkAccRange1: 0.1
+  noteOkAccRange2: 0.2
+  noteGoodAccRange1: 0.05
+  noteGoodAccRange2: 0.1
+  notePerfectAccRange: 0.05
 --- !u!4 &2026156772
 Transform:
   m_ObjectHideFlags: 0
