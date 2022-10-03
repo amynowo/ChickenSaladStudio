@@ -9,8 +9,15 @@ public class ScoreManager : MonoBehaviour
     public AudioSource missSFX;
     public TextMeshPro scoreText;
     public static GameObject[] strikeObjects;
+
+    public static int totalFruits;
     public static int fruitsHit;
-    public static int comboScore;
+    public static int okHits;
+    public static int goodHits;
+    public static int perfectHits;
+    public static int score;
+    public static int currentCombo;
+    public static int highestCombo;
     
     public bool[] laneCheck;
     private bool gameFinished = false;
@@ -24,42 +31,77 @@ public class ScoreManager : MonoBehaviour
         {
             laneCheck[i] = false;
         }
+
+        ResetStats();
     }
     
-    public static void Hit()
+    public static void ResetStats()
+    {
+        totalFruits = 0;
+        fruitsHit = 0;
+        okHits = 0;
+        goodHits = 0;
+        perfectHits = 0;
+        score = 0;
+        currentCombo = 0;
+        highestCombo = 0;
+    }
+    
+    public static void Hit(string accuracy)
     {
         fruitsHit++;
-        GameResult.Instance.fruitsHit++;
-        comboScore++;
+        totalFruits++;
+        currentCombo++;
+
+        if (accuracy == "Ok")
+        {
+            okHits++;
+            score += 1;
+        }
+        else if (accuracy == "Good")
+        {
+            goodHits++;
+            score += 2;
+        }
+        else
+        {
+            perfectHits++;
+            score += 4;
+        }
+
         //Instance.hitSFX.Play();
     }
     public static void Miss()
     {
-        if (comboScore > GameResult.Instance.highestCombo)
-            GameResult.Instance.highestCombo = comboScore;
-        comboScore = 0;
+        totalFruits++;
+        if (currentCombo > highestCombo)
+            highestCombo = currentCombo;
+        currentCombo = 0;
         //Instance.missSFX.Play();
     }
 
     void CheckGameOver()
     {
-        if (!gameFinished && laneCheck.All(x => x) && GameResult.Instance.totalFruits > 0)
+        if (!gameFinished && laneCheck.All(x => x) && totalFruits > 0)
         {
             gameFinished = true;
+            if (currentCombo > highestCombo)
+                highestCombo = currentCombo;
+            
             Invoke(nameof(FinishGame), 1.5f);
         }
     }
     
     void FinishGame()
     {
-        if (GameResult.Instance.totalFruits > 0)
+        if (totalFruits > 0)
             GameResult.Instance.GetComponent<GameResult>().EndLevel(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = fruitsHit.ToString();
+        scoreText.text = score.ToString();
         CheckGameOver();
     }
 }

@@ -16,8 +16,37 @@ public class GlobalVariables : MonoBehaviour
     
     private IEnumerator Start()
     {
+        UpdateLevelStates();
+        GetHighscores();
         StartCoroutine(nameof(LoadMidiFiles));
         yield break;
+    }
+
+    void UpdateLevelStates()
+    {
+        if (!PlayerPrefs.HasKey("Level2Unlocked"))
+        {
+            PlayerPrefs.SetInt("Level2Unlocked", 0);
+            PlayerPrefs.SetInt("Level3Unlocked", 0);
+            PlayerPrefs.SetInt("Level4Unlocked", 0);
+        }
+        else
+        {
+            levels[2] = PlayerPrefs.GetInt("Level2Unlocked") == 1;
+            levels[3] = PlayerPrefs.GetInt("Level3Unlocked") == 1;
+            levels[4] = PlayerPrefs.GetInt("Level4Unlocked") == 1;
+        }
+    }
+
+    void GetHighscores()
+    {
+        if (!PlayerPrefs.HasKey("Level1Highscore"))
+        {
+            PlayerPrefs.SetInt("Level1Highscore", 0);
+            PlayerPrefs.SetInt("Level2Highscore", 0);
+            PlayerPrefs.SetInt("Level3Highscore", 0);
+            PlayerPrefs.SetInt("Level4Highscore", 0);
+        }
     }
     
     void Awake()

@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class GameResult : MonoBehaviour
@@ -25,11 +26,6 @@ public class GameResult : MonoBehaviour
     [SerializeField] GameObject pauseButton;
     [SerializeField] GameObject birds;
     
-    public int fruitsHit;
-    public int totalFruits;
-    public int highestCombo;
-    public int lives = 3;
-
     void Start()
     {
         Instance = this;
@@ -42,7 +38,7 @@ public class GameResult : MonoBehaviour
         LevelManager.Instance.musicAudioSource.Stop();
         StartCoroutine(PlaySfx(pass));
     }
-    
+
     IEnumerator PlaySfx(bool pass)
     {
         foreach (var bird in birds.GetComponentsInChildren<BoxCollider2D>())
@@ -77,6 +73,7 @@ public class GameResult : MonoBehaviour
         {
             gameResultMenuOverlays[0].SetActive(false);
             resultImage.sprite = Instance.resultSprites[1];
+            CheckLevelUnlock();
         }
         else
         {
@@ -86,48 +83,41 @@ public class GameResult : MonoBehaviour
         
         gameResultMenu.SetActive(true);
         
-        SaveHighscore();
-    }
-
-    void SaveHighscore()
-    {
-        bool newHighscore = false;
-        int currentHighscore = PlayerPrefs.GetInt("highscore", 0);
-        if (currentHighscore < fruitsHit)
-        {
-            PlayerPrefs.SetInt("highscore", fruitsHit);
-            newHighscore = true;
-        }
-
-        DisplayStats(newHighscore);
-    }
-
-    void DisplayStats(bool newHighscore)
-    {
-        highestCombo = (highestCombo == 0 ? highestCombo = ScoreManager.comboScore : highestCombo);
-        statistics.text = $"hitrate: {(int)Math.Round((double)(100 * fruitsHit) / totalFruits)}%";
-    }
-
-    public void ResetStats()
-    {
-        fruitsHit = 0;
-        totalFruits = 0;
-        highestCombo = 0;
-        lives = 3;
-        ScoreManager.fruitsHit = 0;
-        ScoreManager.comboScore = 0;
+        DisplayStats();
     }
     
+    void CheckLevelUnlock()
+    {
+        if (GlobalVariables.levels.ContainsKey(GlobalVariables.currentLevel + 1))
+        {
+            if (!GlobalVariables.levels[GlobalVariables.currentLevel + 1])
+            {
+                Debug.Log($"Level {GlobalVariables.currentLevel + 1} unlocked!");
+                PlayerPrefs.SetInt($"Level{GlobalVariables.currentLevel + 1}Unlocked", 1);
+                GlobalVariables.levels[GlobalVariables.currentLevel + 1] = true;
+            }
+        }
+    }
+    
+    void DisplayStats()
+    {
+        Debug.Log($"Ok: {ScoreManager.okHits} | Good: {ScoreManager.goodHits} | Perfect: {ScoreManager.perfectHits} | Score: {ScoreManager.score} | Highest combo: {ScoreManager.highestCombo} | Points: {ScoreManager.score + ScoreManager.highestCombo}");
+        statistics.text = $"accuracy: {Math.Round((ScoreManager.score / ((double)ScoreManager.totalFruits * 4)) * 100)}%";
+        
+        if (ScoreManager.score > PlayerPrefs.GetInt($"Level{GlobalVariables.currentLevel}HighScore"))
+            PlayerPrefs.SetInt($"Level{GlobalVariables.currentLevel}HighScore", 0);
+    }
+
     public void Restart()
     {
-        ResetStats();
+        ScoreManager.ResetStats();
         SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
         Time.timeScale = 1;
     }
 
     public void Quit()
     {
-        ResetStats();
+        ScoreManager.ResetStats();
         Time.timeScale = 1;
         SceneManager.LoadScene("StartScene");
     }

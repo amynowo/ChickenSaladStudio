@@ -85,24 +85,26 @@ public class Lane : MonoBehaviour
                     if (noteHit > noteOkAccRange1 && noteHit <= noteOkAccRange2) // hit > 0.10, hit <= 0.20
                     {
                         accuracyAnimator.SetTrigger("Ok");
+                        Hit("Ok");
                     }
 
                     // Accuracy GOOD
                     if (noteHit > noteGoodAccRange1 && noteHit <= noteGoodAccRange2) // hit > 0.05, hit <= 0.10
                     {
                         accuracyAnimator.SetTrigger("Good");
+                        Hit("Good");
                     }
                     
                     // Accuracy PERFECT
                     if (noteHit <= notePerfectAccRange) // hit <= 0.05
                     {
                         accuracyAnimator.SetTrigger("Perfect");
+                        Hit("Perfect");
                     }
 
                     Destroy(Instantiate(noteAccuracyDisplay), 0.2f);
 
                     // Tap on worm
-                    Hit();
                     birdAnimator.SetTrigger("FruitCaught");
                     Destroy(fruits[inputIndex].gameObject);
                     inputIndex++;
@@ -131,15 +133,13 @@ public class Lane : MonoBehaviour
         }
     }
 
-    private void Hit()
+    private void Hit(string accuracy)
     {
-        GameResult.Instance.totalFruits++;
-        ScoreManager.Hit();
+        ScoreManager.Hit(accuracy);
     }
         
     private void Miss()
     {
-        GameResult.Instance.totalFruits++;
         ScoreManager.Miss();
         LifeManager.Instance.RemoveLife();
     }
