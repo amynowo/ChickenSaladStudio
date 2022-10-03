@@ -86,24 +86,15 @@ public class Lane : MonoBehaviour
                 {
                     // Accuracy OK
                     if (noteHit > noteOkAccRange1 && noteHit <= noteOkAccRange2) // hit > 0.10, hit <= 0.20
-                    {
-                        Debug.Log("OK!: " + noteHit);
                         noteAccuracyDisplay = okAccDisplay;
-                    }
 
                     // Accuracy GOOD
                     if (noteHit > noteGoodAccRange1 && noteHit <= noteGoodAccRange2) // hit > 0.05, hit <= 0.10
-                    {
-                        Debug.Log("Good!: " + noteHit);
                         noteAccuracyDisplay = goodAccDisplay;
-                    }
 
                     // Accuracy PERFECT
                     if (noteHit <= notePerfectAccRange) // hit <= 0.05
-                    {
-                        Debug.Log("Perfect!: " + noteHit);
                         noteAccuracyDisplay = perfecAcctDisplay;
-                    }
 
                     Destroy(Instantiate(noteAccuracyDisplay), 0.2f);
 

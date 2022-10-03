@@ -378,7 +378,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &172352578
 GameObject:
@@ -546,7 +546,7 @@ MonoBehaviour:
   - {fileID: 2026156771}
   songDelaySeconds: 0
   errorMargin: 0.2
-  inputDelayMilliseconds: 0
+  inputDelayMilliseconds: 100
   fruitTime: 2
   fruitSpawnY: 7
   fruitTapY: -3
@@ -1000,7 +1000,7 @@ RectTransform:
   - {fileID: 1441575812}
   - {fileID: 506497233}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1038,7 +1038,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 506497233}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1534,6 +1534,7 @@ RectTransform:
   - {fileID: 989268187}
   - {fileID: 508541083}
   - {fileID: 670665477}
+  - {fileID: 405113005}
   m_Father: {fileID: 398378374}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1670,7 +1671,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &538423572
 GameObject:
@@ -2009,7 +2010,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.05}
+  m_Offset: {x: 0, y: -0.065}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2020,7 +2021,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.4}
+  m_Size: {x: 0.3, y: 0.6}
   m_EdgeRadius: 0
 --- !u!95 &568332590
 Animator:
@@ -2128,7 +2129,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &584112444
 GameObject:
@@ -2345,7 +2346,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2547,8 +2548,17 @@ MonoBehaviour:
   laneNumber: 1
   birdAnimator: {fileID: 1814483572}
   fruitPrefab: {fileID: 2432519803512515327, guid: 5dccc4bcc3d160448a3510b3fd71f430, type: 3}
+  missDisplay: {fileID: 1924827369317930880, guid: bb9d92f607f2db34093557b9068dc64b, type: 3}
+  okAccDisplay: {fileID: 6952848178032732039, guid: 6dd4c9cf574035e4eaed6fe5f0fcd67d, type: 3}
+  goodAccDisplay: {fileID: 6622763168819045546, guid: 9d6578386b0029545a1b46ea74ff5673, type: 3}
+  perfecAcctDisplay: {fileID: 2561601398043504611, guid: a145bfb717738ce43b4a866821d6a7df, type: 3}
   timeStamps: []
   inputIndex: 0
+  noteOkAccRange1: 0.1
+  noteOkAccRange2: 0.2
+  noteGoodAccRange1: 0.05
+  noteGoodAccRange2: 0.1
+  notePerfectAccRange: 0.05
 --- !u!224 &704003514
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2566,7 +2576,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.65, y: 0}
+  m_AnchoredPosition: {x: -1.6500015, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &732045001
@@ -3186,7 +3196,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.035, y: 0.03}
+  m_Offset: {x: 0, y: 0.04}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3197,7 +3207,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.4}
+  m_Size: {x: 0.3, y: 0.6}
   m_EdgeRadius: 0
 --- !u!95 &916927010
 Animator:
@@ -5529,7 +5539,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.4}
+  m_Size: {x: 0.3, y: 0.6}
   m_EdgeRadius: 0
 --- !u!95 &1738208951
 Animator:
@@ -5685,21 +5695,20 @@ MonoBehaviour:
   goodAccDisplay: {fileID: 6622763168819045546, guid: 9d6578386b0029545a1b46ea74ff5673, type: 3}
   perfecAcctDisplay: {fileID: 2561601398043504611, guid: a145bfb717738ce43b4a866821d6a7df, type: 3}
   timeStamps: []
+  inputIndex: 0
   noteOkAccRange1: 0.1
   noteOkAccRange2: 0.2
   noteGoodAccRange1: 0.05
   noteGoodAccRange2: 0.1
   notePerfectAccRange: 0.05
-  inputIndex: 0
 --- !u!224 &1762950362
 RectTransform:
---- !u!4 &1762950360
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1762950358}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5823,7 +5832,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.4}
+  m_Size: {x: 0.3, y: 0.6}
   m_EdgeRadius: 0
 --- !u!95 &1814483572
 Animator:
@@ -6322,13 +6331,13 @@ MonoBehaviour:
   perfecAcctDisplay: {fileID: 2561601398043504611, guid: a145bfb717738ce43b4a866821d6a7df, type: 3}
   timeStamps: []
   inputIndex: 0
---- !u!224 &1994998898
-RectTransform:
   noteOkAccRange1: 0.1
   noteOkAccRange2: 0.2
   noteGoodAccRange1: 0.05
   noteGoodAccRange2: 0.1
   notePerfectAccRange: 0.05
+--- !u!224 &1994998898
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -6344,7 +6353,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.55, y: 0}
+  m_AnchoredPosition: {x: -0.54999924, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2009355142
@@ -6454,19 +6463,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noteRestriction: 3
   laneNumber: 4
-  missDisplay: {fileID: 1924827369317930880, guid: bb9d92f607f2db34093557b9068dc64b, type: 3}
-  okAccDisplay: {fileID: 6952848178032732039, guid: 6dd4c9cf574035e4eaed6fe5f0fcd67d, type: 3}
-  perfecAcctDisplay: {fileID: 2561601398043504611, guid: a145bfb717738ce43b4a866821d6a7df, type: 3}
-  goodAccDisplay: {fileID: 6622763168819045546, guid: 9d6578386b0029545a1b46ea74ff5673, type: 3}
   birdAnimator: {fileID: 916927010}
   fruitPrefab: {fileID: 8305849928966536419, guid: 405bdf2f94392114d950ba7570ac7dd4, type: 3}
+  missDisplay: {fileID: 1924827369317930880, guid: bb9d92f607f2db34093557b9068dc64b, type: 3}
+  okAccDisplay: {fileID: 6952848178032732039, guid: 6dd4c9cf574035e4eaed6fe5f0fcd67d, type: 3}
+  goodAccDisplay: {fileID: 6622763168819045546, guid: 9d6578386b0029545a1b46ea74ff5673, type: 3}
+  perfecAcctDisplay: {fileID: 2561601398043504611, guid: a145bfb717738ce43b4a866821d6a7df, type: 3}
   timeStamps: []
+  inputIndex: 0
   noteOkAccRange1: 0.1
   noteOkAccRange2: 0.2
   noteGoodAccRange1: 0.05
   noteGoodAccRange2: 0.1
   notePerfectAccRange: 0.05
-  inputIndex: 0
 --- !u!224 &2026156774
 RectTransform:
   m_ObjectHideFlags: 0
