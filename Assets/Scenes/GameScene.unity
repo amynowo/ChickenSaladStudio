@@ -5680,10 +5680,20 @@ MonoBehaviour:
   laneNumber: 3
   birdAnimator: {fileID: 568332590}
   fruitPrefab: {fileID: 3326352254345750438, guid: a6d6539eecf437d469c9637dcc4a3906, type: 3}
+  missDisplay: {fileID: 1924827369317930880, guid: bb9d92f607f2db34093557b9068dc64b, type: 3}
+  okAccDisplay: {fileID: 6952848178032732039, guid: 6dd4c9cf574035e4eaed6fe5f0fcd67d, type: 3}
+  goodAccDisplay: {fileID: 6622763168819045546, guid: 9d6578386b0029545a1b46ea74ff5673, type: 3}
+  perfecAcctDisplay: {fileID: 2561601398043504611, guid: a145bfb717738ce43b4a866821d6a7df, type: 3}
   timeStamps: []
+  noteOkAccRange1: 0.1
+  noteOkAccRange2: 0.2
+  noteGoodAccRange1: 0.05
+  noteGoodAccRange2: 0.1
+  notePerfectAccRange: 0.05
   inputIndex: 0
 --- !u!224 &1762950362
 RectTransform:
+--- !u!4 &1762950360
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -6306,10 +6316,19 @@ MonoBehaviour:
   laneNumber: 2
   birdAnimator: {fileID: 1738208951}
   fruitPrefab: {fileID: 1098625078976677032, guid: 557a8c2c71fb1b842a0669b3b6ee4698, type: 3}
+  missDisplay: {fileID: 1924827369317930880, guid: bb9d92f607f2db34093557b9068dc64b, type: 3}
+  okAccDisplay: {fileID: 6952848178032732039, guid: 6dd4c9cf574035e4eaed6fe5f0fcd67d, type: 3}
+  goodAccDisplay: {fileID: 6622763168819045546, guid: 9d6578386b0029545a1b46ea74ff5673, type: 3}
+  perfecAcctDisplay: {fileID: 2561601398043504611, guid: a145bfb717738ce43b4a866821d6a7df, type: 3}
   timeStamps: []
   inputIndex: 0
 --- !u!224 &1994998898
 RectTransform:
+  noteOkAccRange1: 0.1
+  noteOkAccRange2: 0.2
+  noteGoodAccRange1: 0.05
+  noteGoodAccRange2: 0.1
+  notePerfectAccRange: 0.05
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -6435,9 +6454,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noteRestriction: 3
   laneNumber: 4
+  missDisplay: {fileID: 1924827369317930880, guid: bb9d92f607f2db34093557b9068dc64b, type: 3}
+  okAccDisplay: {fileID: 6952848178032732039, guid: 6dd4c9cf574035e4eaed6fe5f0fcd67d, type: 3}
+  perfecAcctDisplay: {fileID: 2561601398043504611, guid: a145bfb717738ce43b4a866821d6a7df, type: 3}
+  goodAccDisplay: {fileID: 6622763168819045546, guid: 9d6578386b0029545a1b46ea74ff5673, type: 3}
   birdAnimator: {fileID: 916927010}
   fruitPrefab: {fileID: 8305849928966536419, guid: 405bdf2f94392114d950ba7570ac7dd4, type: 3}
   timeStamps: []
+  noteOkAccRange1: 0.1
+  noteOkAccRange2: 0.2
+  noteGoodAccRange1: 0.05
+  noteGoodAccRange2: 0.1
+  notePerfectAccRange: 0.05
   inputIndex: 0
 --- !u!224 &2026156774
 RectTransform:

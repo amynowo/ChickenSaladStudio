@@ -4,7 +4,11 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - wormPrefab: {fileID: 3385450383014252706, guid: 6d23ff296dca48748980dc87edb963a8, type: 3}
+  - wormPrefab: {instanceID: 0}
+  - missDisplay: {fileID: 1924827369317930880, guid: bb9d92f607f2db34093557b9068dc64b, type: 3}
+  - okAccDisplay: {fileID: 6952848178032732039, guid: 6dd4c9cf574035e4eaed6fe5f0fcd67d, type: 3}
+  - goodAccDisplay: {fileID: 6622763168819045546, guid: 9d6578386b0029545a1b46ea74ff5673, type: 3}
+  - perfecAcctDisplay: {fileID: 2561601398043504611, guid: a145bfb717738ce43b4a866821d6a7df, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
