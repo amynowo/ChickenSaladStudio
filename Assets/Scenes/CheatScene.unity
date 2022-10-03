@@ -620,8 +620,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
+      - m_Target: {fileID: 1379647496}
+        m_TargetAssemblyTypeName: Cheats, Assembly-CSharp
         m_MethodName: Back
         m_Mode: 1
         m_Arguments:

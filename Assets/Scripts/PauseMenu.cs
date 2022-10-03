@@ -35,8 +35,8 @@ public class PauseMenu : MonoBehaviour
         SetMusicVolume();
         
         foreach (var bird in birds.GetComponentsInChildren<SpriteRenderer>())
-            bird.sortingOrder = 1;
-        branch.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            bird.enabled = false;
+        //branch.GetComponent<SpriteRenderer>().sortingOrder = 0;
     }
 
     void SetMusicVolume()
@@ -81,8 +81,8 @@ public class PauseMenu : MonoBehaviour
     public void Continue()
     {
         foreach (var bird in birds.GetComponentsInChildren<SpriteRenderer>())
-            bird.sortingOrder = 5;
-        branch.GetComponent<SpriteRenderer>().sortingOrder = 4;
+            bird.enabled = true;
+        //branch.GetComponent<SpriteRenderer>().sortingOrder = 4;
         
         audioMixer.SetFloat("Theme", -80);
         pauseMenu.SetActive(false);

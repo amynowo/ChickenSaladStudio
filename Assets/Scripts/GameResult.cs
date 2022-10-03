@@ -25,8 +25,8 @@ public class GameResult : MonoBehaviour
     [SerializeField] GameObject pauseButton;
     [SerializeField] GameObject birds;
     
-    public int wormsHit;
-    public int totalWorms;
+    public int fruitsHit;
+    public int totalFruits;
     public int highestCombo;
     public int lives = 3;
 
@@ -93,9 +93,9 @@ public class GameResult : MonoBehaviour
     {
         bool newHighscore = false;
         int currentHighscore = PlayerPrefs.GetInt("highscore", 0);
-        if (currentHighscore < wormsHit)
+        if (currentHighscore < fruitsHit)
         {
-            PlayerPrefs.SetInt("highscore", wormsHit);
+            PlayerPrefs.SetInt("highscore", fruitsHit);
             newHighscore = true;
         }
 
@@ -105,16 +105,16 @@ public class GameResult : MonoBehaviour
     void DisplayStats(bool newHighscore)
     {
         highestCombo = (highestCombo == 0 ? highestCombo = ScoreManager.comboScore : highestCombo);
-        statistics.text = $"hitrate: {(int)Math.Round((double)(100 * wormsHit) / totalWorms)}%";
+        statistics.text = $"hitrate: {(int)Math.Round((double)(100 * fruitsHit) / totalFruits)}%";
     }
 
     public void ResetStats()
     {
-        wormsHit = 0;
-        totalWorms = 0;
+        fruitsHit = 0;
+        totalFruits = 0;
         highestCombo = 0;
         lives = 3;
-        ScoreManager.wormsHit = 0;
+        ScoreManager.fruitsHit = 0;
         ScoreManager.comboScore = 0;
     }
     

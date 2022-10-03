@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Interaction;
@@ -16,17 +17,18 @@ public class LevelManager : MonoBehaviour
     public float songDelaySeconds;
     public double errorMargin; // in seconds
     public int inputDelayMilliseconds;
-
-    //public string fileName;
-    public float wormTime;
-    public float wormSpawnY;
-    public float wormTapY;
-    public float wormDespawnY
+    
+    public float fruitTime;
+    public float fruitSpawnY;
+    public float fruitTapY;
+    public float fruitDespawnY
     {
-        get { return wormTapY - (wormSpawnY - wormTapY); }
+        get { return fruitTapY - (fruitSpawnY - fruitTapY); }
     }
 
     public MidiFile midiFile;
+
+    public GameObject hitBar;
     
     // Start is called before the first frame update
     void Start()
@@ -36,8 +38,22 @@ public class LevelManager : MonoBehaviour
         musicAudioSource.clip = audioClips[GlobalVariables.currentLevel - 1];
 
         backgroundImageObject.sprite = backgroundImages[GlobalVariables.currentLevel - 1];
-        
+
+        var screenWidth = Screen.currentResolution.width;
+        var screenHeight = Screen.currentResolution.height;
+        if (screenWidth > screenHeight)
+        {
+            fruitTapY = (float)-3.25;
+        }
+        else
+        {
+            decimal ratio = Decimal.Parse(screenWidth.ToString()) / Decimal.Parse(screenHeight.ToString());
+            decimal calc = Decimal.Subtract(Decimal.Multiply(Decimal.Parse("3,6111095061735536"), ratio), Decimal.Parse("4,6666657037041315"));
+            fruitTapY = (float)calc;
+        }
+
         Instance = this;
+        hitBar.transform.SetPositionAndRotation(new Vector3(0.0f, fruitTapY), new Quaternion());
         GetDataFromMidi();
     }
     
