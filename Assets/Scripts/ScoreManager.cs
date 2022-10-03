@@ -7,9 +7,9 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance;
     public AudioSource hitSFX;
     public AudioSource missSFX;
-    //public TMPro.TextMeshPro scoreText;
+    public TextMeshPro scoreText;
     public static GameObject[] strikeObjects;
-    public static int wormsHit;
+    public static int fruitsHit;
     public static int comboScore;
     
     public bool[] laneCheck;
@@ -26,11 +26,10 @@ public class ScoreManager : MonoBehaviour
         }
     }
     
-    
     public static void Hit()
     {
-        wormsHit++;
-        GameResult.Instance.wormsHit++;
+        fruitsHit++;
+        GameResult.Instance.fruitsHit++;
         comboScore++;
         //Instance.hitSFX.Play();
     }
@@ -44,7 +43,7 @@ public class ScoreManager : MonoBehaviour
 
     void CheckGameOver()
     {
-        if (!gameFinished && laneCheck.All(x => x) && GameResult.Instance.totalWorms > 0)
+        if (!gameFinished && laneCheck.All(x => x) && GameResult.Instance.totalFruits > 0)
         {
             gameFinished = true;
             Invoke(nameof(FinishGame), 1.5f);
@@ -53,14 +52,14 @@ public class ScoreManager : MonoBehaviour
     
     void FinishGame()
     {
-        if (GameResult.Instance.totalWorms > 0)
+        if (GameResult.Instance.totalFruits > 0)
             GameResult.Instance.GetComponent<GameResult>().EndLevel(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        GetComponent<TextMeshPro>().text = wormsHit.ToString();
+        scoreText.text = fruitsHit.ToString();
         CheckGameOver();
     }
 }

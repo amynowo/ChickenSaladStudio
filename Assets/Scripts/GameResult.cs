@@ -15,6 +15,8 @@ public class GameResult : MonoBehaviour
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] AudioSource gameResultFailSFX;
     [SerializeField] AudioSource gameResultPassSFX;
+    public Animator[] birdAnimators;
+    
     [SerializeField] GameObject gameResultMenu;
     [SerializeField] GameObject[] gameResultMenuOverlays;
     [SerializeField] SpriteRenderer resultImage;
@@ -23,8 +25,8 @@ public class GameResult : MonoBehaviour
     [SerializeField] GameObject pauseButton;
     [SerializeField] GameObject birds;
     
-    public int wormsHit;
-    public int totalWorms;
+    public int fruitsHit;
+    public int totalFruits;
     public int highestCombo;
     public int lives = 3;
 
@@ -45,11 +47,24 @@ public class GameResult : MonoBehaviour
     {
         foreach (var bird in birds.GetComponentsInChildren<BoxCollider2D>())
             bird.enabled = false;
-        
+
         if (pass)
+        {
+            foreach (var birdAnimator in birdAnimators)
+                birdAnimator.SetTrigger("Pass");
+
             gameResultPassSFX.Play();
+        }
         else
+        {
+            foreach (var birdAnimator in birdAnimators)
+            {
+                birdAnimator.SetBool("Fail", true);
+                birdAnimator.SetTrigger("FruitMissed");
+            }
+
             gameResultFailSFX.Play();
+        }
 
         yield return new WaitForSeconds(3);
         OpenGameResult(pass);
@@ -70,7 +85,6 @@ public class GameResult : MonoBehaviour
         }
         
         gameResultMenu.SetActive(true);
-        Time.timeScale = 0;
         
         SaveHighscore();
     }
@@ -79,9 +93,9 @@ public class GameResult : MonoBehaviour
     {
         bool newHighscore = false;
         int currentHighscore = PlayerPrefs.GetInt("highscore", 0);
-        if (currentHighscore < wormsHit)
+        if (currentHighscore < fruitsHit)
         {
-            PlayerPrefs.SetInt("highscore", wormsHit);
+            PlayerPrefs.SetInt("highscore", fruitsHit);
             newHighscore = true;
         }
 
@@ -91,16 +105,16 @@ public class GameResult : MonoBehaviour
     void DisplayStats(bool newHighscore)
     {
         highestCombo = (highestCombo == 0 ? highestCombo = ScoreManager.comboScore : highestCombo);
-        statistics.text = $"hitrate: {(int)Math.Round((double)(100 * wormsHit) / totalWorms)}%";
+        statistics.text = $"hitrate: {(int)Math.Round((double)(100 * fruitsHit) / totalFruits)}%";
     }
 
     public void ResetStats()
     {
-        wormsHit = 0;
-        totalWorms = 0;
+        fruitsHit = 0;
+        totalFruits = 0;
         highestCombo = 0;
         lives = 3;
-        ScoreManager.wormsHit = 0;
+        ScoreManager.fruitsHit = 0;
         ScoreManager.comboScore = 0;
     }
     

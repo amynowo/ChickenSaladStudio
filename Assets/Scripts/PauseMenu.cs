@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement; // to get back to main menu scene
-using System;
 using TMPro;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -11,28 +9,60 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseButton;
     [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject pauseOptions;
+
+    [SerializeField] private GameObject soundSettings;
     [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private GameObject volumeOnButton;
+    [SerializeField] private GameObject volumeOffButton;
     [SerializeField] private Slider musicVolumeSlider;
+    
     [SerializeField] GameObject birds;
     [SerializeField] GameObject branch;
     [SerializeField] TextMeshProUGUI countdownText;
+    
+    private bool volumeMute;
     
     public void Pause()
     {
         pauseButton.SetActive(false);
         pauseMenu.SetActive(true);
+        soundSettings.SetActive(false);
         Time.timeScale = 0;
         LevelManager.Instance.musicAudioSource.Pause();
+        
         audioMixer.SetFloat("Theme", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
-        SetMusicVolumeSlider();
+        SetMusicVolume();
+        
         foreach (var bird in birds.GetComponentsInChildren<SpriteRenderer>())
-            bird.sortingOrder = 1;
-        branch.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            bird.enabled = false;
+        //branch.GetComponent<SpriteRenderer>().sortingOrder = 0;
     }
 
-    void SetMusicVolumeSlider()
+    void SetMusicVolume()
     {
+        volumeMute = PlayerPrefs.GetInt("VolumeMute") == 1;
+        
+        volumeOffButton.SetActive(volumeMute);
+        volumeOnButton.SetActive(!volumeMute);
+
+        audioMixer.SetFloat("Master", volumeMute ? -80.0f : 0.0f);
         musicVolumeSlider.SetValueWithoutNotify(PlayerPrefs.GetFloat("MusicVolume"));
+    }
+    
+    public void Sound()
+    {
+        pauseOptions.SetActive(false);
+        soundSettings.SetActive(true);
+    }
+    
+    public void Mute()
+    {
+        volumeOnButton.SetActive(volumeMute);
+        volumeOffButton.SetActive(!volumeMute);
+        volumeMute = !volumeMute;
+        PlayerPrefs.SetInt("VolumeMute", volumeMute ? 1 : 0);
+        audioMixer.SetFloat("Master", volumeMute ? -80.0f : 0.0f);
     }
     
     public void ChangeMusicVolume(float value)
@@ -41,12 +71,18 @@ public class PauseMenu : MonoBehaviour
         audioMixer.SetFloat("Music", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
         audioMixer.SetFloat("Theme", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
     }
+    
+    public void Back()
+    {
+        soundSettings.SetActive(false);
+        pauseOptions.SetActive(true);
+    }
 
     public void Continue()
     {
         foreach (var bird in birds.GetComponentsInChildren<SpriteRenderer>())
-            bird.sortingOrder = 5;
-        branch.GetComponent<SpriteRenderer>().sortingOrder = 4;
+            bird.enabled = true;
+        //branch.GetComponent<SpriteRenderer>().sortingOrder = 4;
         
         audioMixer.SetFloat("Theme", -80);
         pauseMenu.SetActive(false);

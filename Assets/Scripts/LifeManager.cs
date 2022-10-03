@@ -26,7 +26,7 @@ public class LifeManager : MonoBehaviour
         GameResult.Instance.lives--;
         if (lifeCount == 0)
         {
-            GameResult.Instance.GetComponent<GameResult>().EndLevel(false);
+            GameResult.Instance.GetComponent<GameResult>().EndLevel(true);
         }
     }
 

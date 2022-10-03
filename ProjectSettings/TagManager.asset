@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - ThemeMusic
+  - GlobalVariables
   layers:
   - Default
   - TransparentFX
