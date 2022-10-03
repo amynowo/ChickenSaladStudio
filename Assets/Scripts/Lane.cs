@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 using Melanchall.DryWetMidi.Interaction;
+using Unity.VisualScripting;
 
 public class Lane : MonoBehaviour
 {
@@ -11,16 +13,11 @@ public class Lane : MonoBehaviour
     public int laneNumber;
 
     public Animator birdAnimator;
+    public Animator accuracyAnimator;
     public GameObject fruitPrefab;
     List<Fruit> fruits = new List<Fruit>();
 
-    // Accuracy prefabs
-    public GameObject missDisplay;
-    public GameObject okAccDisplay;
-    public GameObject goodAccDisplay;
-    public GameObject perfecAcctDisplay;
-
-    GameObject noteAccuracyDisplay;
+    public GameObject noteAccuracyDisplay;
     public List<double> timeStamps = new List<double>();
     
     int spawnIndex = 0;
@@ -86,15 +83,21 @@ public class Lane : MonoBehaviour
                 {
                     // Accuracy OK
                     if (noteHit > noteOkAccRange1 && noteHit <= noteOkAccRange2) // hit > 0.10, hit <= 0.20
-                        noteAccuracyDisplay = okAccDisplay;
+                    {
+                        accuracyAnimator.SetTrigger("Ok");
+                    }
 
                     // Accuracy GOOD
                     if (noteHit > noteGoodAccRange1 && noteHit <= noteGoodAccRange2) // hit > 0.05, hit <= 0.10
-                        noteAccuracyDisplay = goodAccDisplay;
-
+                    {
+                        accuracyAnimator.SetTrigger("Good");
+                    }
+                    
                     // Accuracy PERFECT
                     if (noteHit <= notePerfectAccRange) // hit <= 0.05
-                        noteAccuracyDisplay = perfecAcctDisplay;
+                    {
+                        accuracyAnimator.SetTrigger("Perfect");
+                    }
 
                     Destroy(Instantiate(noteAccuracyDisplay), 0.2f);
 
@@ -115,9 +118,8 @@ public class Lane : MonoBehaviour
             }
             if (timeStamp + marginOfError <= audioTime)
             {
-                // Missed fruit
-                Destroy(Instantiate(missDisplay), 0.2f);
                 Miss();
+                accuracyAnimator.SetTrigger("Miss");
                 birdAnimator.SetTrigger("FruitMissed");
                 inputIndex++;
             }
