@@ -13,18 +13,35 @@ public class Lane : MonoBehaviour
     public Animator birdAnimator;
     public GameObject fruitPrefab;
     List<Fruit> fruits = new List<Fruit>();
+
+    // Accuracy prefabs
+    public GameObject missDisplay;
+    public GameObject okAccDisplay;
+    public GameObject goodAccDisplay;
+    public GameObject perfecAcctDisplay;
+
+    GameObject noteAccuracyDisplay;
     public List<double> timeStamps = new List<double>();
     
     int spawnIndex = 0;
     public int inputIndex = 0;
     
+    // range within error margin to get 'ok' accuracy
+    public double noteOkAccRange1 = 0.10;
+    public double noteOkAccRange2 = 0.20;
+
+    // range within error margin to get 'good' accuracy
+    public double noteGoodAccRange1 = 0.05; 
+    public double noteGoodAccRange2 = 0.10;
+    // range within error margin to get 'perfect' accuracy
+
+    public double notePerfectAccRange = 0.05; 
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
-    
-    
+
     public void SetTimeStamps(Note[] array)
     {
         foreach (var note in array)
@@ -37,8 +54,7 @@ public class Lane : MonoBehaviour
         }
     }
     
-    
-    // Update is called once per frame
+    // Update is called once per frame, fixed update is called at set time
     void FixedUpdate()
     {
         if (spawnIndex < timeStamps.Count)
@@ -65,9 +81,24 @@ public class Lane : MonoBehaviour
 
             if (Touchbox.currentLane == laneNumber && Touchbox.currentIndex == inputIndex)
             {
-                if (Math.Abs(audioTime - timeStamp) < marginOfError)
+                double noteHit = Math.Abs(audioTime - timeStamp);
+                if (noteHit <= marginOfError)
                 {
-                    // Tap on fruit
+                    // Accuracy OK
+                    if (noteHit > noteOkAccRange1 && noteHit <= noteOkAccRange2) // hit > 0.10, hit <= 0.20
+                        noteAccuracyDisplay = okAccDisplay;
+
+                    // Accuracy GOOD
+                    if (noteHit > noteGoodAccRange1 && noteHit <= noteGoodAccRange2) // hit > 0.05, hit <= 0.10
+                        noteAccuracyDisplay = goodAccDisplay;
+
+                    // Accuracy PERFECT
+                    if (noteHit <= notePerfectAccRange) // hit <= 0.05
+                        noteAccuracyDisplay = perfecAcctDisplay;
+
+                    Destroy(Instantiate(noteAccuracyDisplay), 0.2f);
+
+                    // Tap on worm
                     Hit();
                     birdAnimator.SetTrigger("FruitCaught");
                     Destroy(fruits[inputIndex].gameObject);
@@ -85,6 +116,7 @@ public class Lane : MonoBehaviour
             if (timeStamp + marginOfError <= audioTime)
             {
                 // Missed fruit
+                Destroy(Instantiate(missDisplay), 0.2f);
                 Miss();
                 birdAnimator.SetTrigger("FruitMissed");
                 inputIndex++;
