@@ -2668,10 +2668,6 @@ MonoBehaviour:
   birdAnimator: {fileID: 1814483572}
   accuracyAnimator: {fileID: 96882532}
   fruitPrefab: {fileID: 2432519803512515327, guid: 5dccc4bcc3d160448a3510b3fd71f430, type: 3}
-  missDisplay: {fileID: 0}
-  okAccDisplay: {fileID: 0}
-  goodAccDisplay: {fileID: 0}
-  perfecAcctDisplay: {fileID: 0}
   noteAccuracyDisplay: {fileID: 96882529}
   timeStamps: []
   inputIndex: 0
@@ -3406,7 +3402,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 150}
-  m_SizeDelta: {x: 350, y: 50}
+  m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &989268188
 MonoBehaviour:
@@ -3428,7 +3424,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'hitrate: 100%'
+  m_text: 'accuracy: 100%'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 90de7bbcbfef96b4b827ac6800554748, type: 2}
   m_sharedMaterial: {fileID: -4034094522356363488, guid: 90de7bbcbfef96b4b827ac6800554748, type: 2}
@@ -3461,7 +3457,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 8
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -4733,10 +4729,6 @@ MonoBehaviour:
   statistics: {fileID: 989268188}
   pauseButton: {fileID: 1289047908}
   birds: {fileID: 194580327}
-  fruitsHit: 0
-  totalFruits: 0
-  highestCombo: 0
-  lives: 0
 --- !u!82 &1441575814
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5723,10 +5715,6 @@ MonoBehaviour:
   birdAnimator: {fileID: 568332590}
   accuracyAnimator: {fileID: 96882532}
   fruitPrefab: {fileID: 3326352254345750438, guid: a6d6539eecf437d469c9637dcc4a3906, type: 3}
-  missDisplay: {fileID: 1924827369317930880, guid: bb9d92f607f2db34093557b9068dc64b, type: 3}
-  okAccDisplay: {fileID: 6952848178032732039, guid: 6dd4c9cf574035e4eaed6fe5f0fcd67d, type: 3}
-  goodAccDisplay: {fileID: 6622763168819045546, guid: 9d6578386b0029545a1b46ea74ff5673, type: 3}
-  perfecAcctDisplay: {fileID: 2561601398043504611, guid: a145bfb717738ce43b4a866821d6a7df, type: 3}
   noteAccuracyDisplay: {fileID: 96882529}
   timeStamps: []
   inputIndex: 0
@@ -6360,10 +6348,6 @@ MonoBehaviour:
   birdAnimator: {fileID: 1738208951}
   accuracyAnimator: {fileID: 96882532}
   fruitPrefab: {fileID: 1098625078976677032, guid: 557a8c2c71fb1b842a0669b3b6ee4698, type: 3}
-  missDisplay: {fileID: 1924827369317930880, guid: bb9d92f607f2db34093557b9068dc64b, type: 3}
-  okAccDisplay: {fileID: 6952848178032732039, guid: 6dd4c9cf574035e4eaed6fe5f0fcd67d, type: 3}
-  goodAccDisplay: {fileID: 6622763168819045546, guid: 9d6578386b0029545a1b46ea74ff5673, type: 3}
-  perfecAcctDisplay: {fileID: 2561601398043504611, guid: a145bfb717738ce43b4a866821d6a7df, type: 3}
   noteAccuracyDisplay: {fileID: 96882529}
   timeStamps: []
   inputIndex: 0
@@ -6502,10 +6486,6 @@ MonoBehaviour:
   birdAnimator: {fileID: 916927010}
   accuracyAnimator: {fileID: 96882532}
   fruitPrefab: {fileID: 8305849928966536419, guid: 405bdf2f94392114d950ba7570ac7dd4, type: 3}
-  missDisplay: {fileID: 1924827369317930880, guid: bb9d92f607f2db34093557b9068dc64b, type: 3}
-  okAccDisplay: {fileID: 6952848178032732039, guid: 6dd4c9cf574035e4eaed6fe5f0fcd67d, type: 3}
-  goodAccDisplay: {fileID: 6622763168819045546, guid: 9d6578386b0029545a1b46ea74ff5673, type: 3}
-  perfecAcctDisplay: {fileID: 2561601398043504611, guid: a145bfb717738ce43b4a866821d6a7df, type: 3}
   noteAccuracyDisplay: {fileID: 96882529}
   timeStamps: []
   inputIndex: 0

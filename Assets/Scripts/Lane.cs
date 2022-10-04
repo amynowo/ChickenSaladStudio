@@ -30,13 +30,16 @@ public class Lane : MonoBehaviour
     // range within error margin to get 'good' accuracy
     public double noteGoodAccRange1 = 0.05; 
     public double noteGoodAccRange2 = 0.10;
+    
     // range within error margin to get 'perfect' accuracy
+    public double notePerfectAccRange = 0.05;
 
-    public double notePerfectAccRange = 0.05; 
+    private bool cheatsOn;
 
     // Start is called before the first frame update
     void Start()
     {
+        cheatsOn = PlayerPrefs.GetInt("GodModeCheat") == 1;
     }
 
     public void SetTimeStamps(Note[] array)
@@ -76,7 +79,7 @@ public class Lane : MonoBehaviour
             double marginOfError = LevelManager.Instance.errorMargin;
             double audioTime = LevelManager.Instance.GetAudioSourceTime() - (LevelManager.Instance.inputDelayMilliseconds / 1000.0);
 
-            if (Touchbox.currentLane == laneNumber && Touchbox.currentIndex == inputIndex)
+            if (!cheatsOn && Touchbox.currentLane == laneNumber && Touchbox.currentIndex == inputIndex)
             {
                 double noteHit = Math.Abs(audioTime - timeStamp);
                 if (noteHit <= marginOfError)
@@ -118,11 +121,21 @@ public class Lane : MonoBehaviour
                 Touchbox.currentLane = 0;
                 Touchbox.currentIndex = 0;
             }
-            if (timeStamp + marginOfError <= audioTime)
+            if (!cheatsOn && timeStamp + marginOfError <= audioTime)
             {
                 Miss();
                 accuracyAnimator.SetTrigger("Miss");
                 birdAnimator.SetTrigger("FruitMissed");
+                inputIndex++;
+            }
+            else if (cheatsOn && Math.Abs(audioTime - timeStamp) <= 0.2)
+            {
+                accuracyAnimator.SetTrigger("Perfect");
+                birdAnimator.SetTrigger("FruitCaught");
+                Hit("Perfect");
+                
+                Destroy(Instantiate(noteAccuracyDisplay), 0.2f);
+                Destroy(fruits[inputIndex].gameObject);
                 inputIndex++;
             }
         }

@@ -18,6 +18,7 @@ public class GlobalVariables : MonoBehaviour
     {
         UpdateLevelStates();
         GetHighscores();
+        GetCheats();
         StartCoroutine(nameof(LoadMidiFiles));
         yield break;
     }
@@ -46,6 +47,18 @@ public class GlobalVariables : MonoBehaviour
             PlayerPrefs.SetInt("Level2Highscore", 0);
             PlayerPrefs.SetInt("Level3Highscore", 0);
             PlayerPrefs.SetInt("Level4Highscore", 0);
+        }
+    }
+
+    void GetCheats()
+    {
+        if (!PlayerPrefs.HasKey("GodModeCheat"))
+        {
+            PlayerPrefs.SetInt("GodModeCheatLocked", 1);
+            PlayerPrefs.SetInt("GodModeCheat", 0);
+            
+            PlayerPrefs.SetInt("ShortcutCheatLocked", 1);
+            PlayerPrefs.SetInt("ShortcutCheat", 0);
         }
     }
     

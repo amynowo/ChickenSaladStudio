@@ -24,9 +24,18 @@ public class LevelSelect : MonoBehaviour
     {
         foreach (var level in GlobalVariables.levels)
         {
-            var levelObject = GetComponent<Transform>().GetComponentsInChildren<Transform>().First(x => x.gameObject.name == $"Level {level.Key}").gameObject;
-            levelObject.GetComponentInChildren<Transform>().Find("Button").gameObject.SetActive(level.Value);
-            levelObject.GetComponentInChildren<Transform>().Find("Lock").gameObject.SetActive(!level.Value);
+            if (PlayerPrefs.GetInt("ShortcutCheat") == 1)
+            {
+                var levelObject = GetComponent<Transform>().GetComponentsInChildren<Transform>().First(x => x.gameObject.name == $"Level {level.Key}").gameObject;
+                levelObject.GetComponentInChildren<Transform>().Find("Button").gameObject.SetActive(true);
+                levelObject.GetComponentInChildren<Transform>().Find("Lock").gameObject.SetActive(false);
+            }
+            else
+            {
+                var levelObject = GetComponent<Transform>().GetComponentsInChildren<Transform>().First(x => x.gameObject.name == $"Level {level.Key}").gameObject;
+                levelObject.GetComponentInChildren<Transform>().Find("Button").gameObject.SetActive(level.Value);
+                levelObject.GetComponentInChildren<Transform>().Find("Lock").gameObject.SetActive(!level.Value);
+            }
         }
     }
 

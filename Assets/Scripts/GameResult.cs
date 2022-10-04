@@ -92,7 +92,6 @@ public class GameResult : MonoBehaviour
         {
             if (!GlobalVariables.levels[GlobalVariables.currentLevel + 1])
             {
-                Debug.Log($"Level {GlobalVariables.currentLevel + 1} unlocked!");
                 PlayerPrefs.SetInt($"Level{GlobalVariables.currentLevel + 1}Unlocked", 1);
                 GlobalVariables.levels[GlobalVariables.currentLevel + 1] = true;
             }
