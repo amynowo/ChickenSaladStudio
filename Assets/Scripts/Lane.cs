@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 using Melanchall.DryWetMidi.Interaction;
+using Unity.VisualScripting;
 
 public class Lane : MonoBehaviour
 {
@@ -11,16 +13,11 @@ public class Lane : MonoBehaviour
     public int laneNumber;
 
     public Animator birdAnimator;
+    public Animator accuracyAnimator;
     public GameObject fruitPrefab;
     List<Fruit> fruits = new List<Fruit>();
 
-    // Accuracy prefabs
-    public GameObject missDisplay;
-    public GameObject okAccDisplay;
-    public GameObject goodAccDisplay;
-    public GameObject perfecAcctDisplay;
-
-    GameObject noteAccuracyDisplay;
+    public GameObject noteAccuracyDisplay;
     public List<double> timeStamps = new List<double>();
     
     int spawnIndex = 0;
@@ -33,13 +30,16 @@ public class Lane : MonoBehaviour
     // range within error margin to get 'good' accuracy
     public double noteGoodAccRange1 = 0.05; 
     public double noteGoodAccRange2 = 0.10;
+    
     // range within error margin to get 'perfect' accuracy
+    public double notePerfectAccRange = 0.05;
 
-    public double notePerfectAccRange = 0.05; 
+    private bool cheatsOn;
 
     // Start is called before the first frame update
     void Start()
     {
+        cheatsOn = PlayerPrefs.GetInt("GodModeCheat") == 1;
     }
 
     public void SetTimeStamps(Note[] array)
@@ -79,27 +79,35 @@ public class Lane : MonoBehaviour
             double marginOfError = LevelManager.Instance.errorMargin;
             double audioTime = LevelManager.Instance.GetAudioSourceTime() - (LevelManager.Instance.inputDelayMilliseconds / 1000.0);
 
-            if (Touchbox.currentLane == laneNumber && Touchbox.currentIndex == inputIndex)
+            if (!cheatsOn && Touchbox.currentLane == laneNumber && Touchbox.currentIndex == inputIndex)
             {
                 double noteHit = Math.Abs(audioTime - timeStamp);
                 if (noteHit <= marginOfError)
                 {
                     // Accuracy OK
                     if (noteHit > noteOkAccRange1 && noteHit <= noteOkAccRange2) // hit > 0.10, hit <= 0.20
-                        noteAccuracyDisplay = okAccDisplay;
+                    {
+                        accuracyAnimator.SetTrigger("Ok");
+                        Hit("Ok");
+                    }
 
                     // Accuracy GOOD
                     if (noteHit > noteGoodAccRange1 && noteHit <= noteGoodAccRange2) // hit > 0.05, hit <= 0.10
-                        noteAccuracyDisplay = goodAccDisplay;
-
+                    {
+                        accuracyAnimator.SetTrigger("Good");
+                        Hit("Good");
+                    }
+                    
                     // Accuracy PERFECT
                     if (noteHit <= notePerfectAccRange) // hit <= 0.05
-                        noteAccuracyDisplay = perfecAcctDisplay;
+                    {
+                        accuracyAnimator.SetTrigger("Perfect");
+                        Hit("Perfect");
+                    }
 
                     Destroy(Instantiate(noteAccuracyDisplay), 0.2f);
 
                     // Tap on worm
-                    Hit();
                     birdAnimator.SetTrigger("FruitCaught");
                     Destroy(fruits[inputIndex].gameObject);
                     inputIndex++;
@@ -113,12 +121,21 @@ public class Lane : MonoBehaviour
                 Touchbox.currentLane = 0;
                 Touchbox.currentIndex = 0;
             }
-            if (timeStamp + marginOfError <= audioTime)
+            if (!cheatsOn && timeStamp + marginOfError <= audioTime)
             {
-                // Missed fruit
-                Destroy(Instantiate(missDisplay), 0.2f);
                 Miss();
+                accuracyAnimator.SetTrigger("Miss");
                 birdAnimator.SetTrigger("FruitMissed");
+                inputIndex++;
+            }
+            else if (cheatsOn && Math.Abs(audioTime - timeStamp) <= 0.2)
+            {
+                accuracyAnimator.SetTrigger("Perfect");
+                birdAnimator.SetTrigger("FruitCaught");
+                Hit("Perfect");
+                
+                Destroy(Instantiate(noteAccuracyDisplay), 0.2f);
+                Destroy(fruits[inputIndex].gameObject);
                 inputIndex++;
             }
         }
@@ -129,15 +146,13 @@ public class Lane : MonoBehaviour
         }
     }
 
-    private void Hit()
+    private void Hit(string accuracy)
     {
-        GameResult.Instance.totalFruits++;
-        ScoreManager.Hit();
+        ScoreManager.Hit(accuracy);
     }
         
     private void Miss()
     {
-        GameResult.Instance.totalFruits++;
         ScoreManager.Miss();
         LifeManager.Instance.RemoveLife();
     }

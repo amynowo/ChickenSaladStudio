@@ -125,7 +125,7 @@ AnimatorStateTransition:
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 2
-  m_OrderedInterruption: 1
+  m_OrderedInterruption: 0
   m_CanTransitionToSelf: 1
 --- !u!91 &9100000
 AnimatorController:
@@ -136,42 +136,42 @@ AnimatorController:
   m_Name: Bird4
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Fail
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: Pass
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: FruitMissed
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: FruitCaught
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: Eat
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
   - m_Name: Idle
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
+  - m_Name: Fail
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: Pass
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: FruitMissed
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: FruitCaught
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: Eat
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -289,7 +289,7 @@ AnimatorStateTransition:
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 2
-  m_OrderedInterruption: 1
+  m_OrderedInterruption: 0
   m_CanTransitionToSelf: 1
 --- !u!1107 &5065299662614638559
 AnimatorStateMachine:
@@ -380,7 +380,7 @@ AnimatorStateTransition:
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 2
-  m_OrderedInterruption: 1
+  m_OrderedInterruption: 0
   m_CanTransitionToSelf: 1
 --- !u!1101 &5928136393870517068
 AnimatorStateTransition:
@@ -476,5 +476,5 @@ AnimatorStateTransition:
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 2
-  m_OrderedInterruption: 1
+  m_OrderedInterruption: 0
   m_CanTransitionToSelf: 1
