@@ -12,7 +12,8 @@ public class Lane : MonoBehaviour
     [Range(1, 4)]
     public int laneNumber;
 
-    public Animator birdAnimator;
+    private Animator birdAnimator;
+    public Animator[] birdAnimators;
     public Animator accuracyAnimator;
     public GameObject fruitPrefab;
     List<Fruit> fruits = new List<Fruit>();
@@ -39,6 +40,11 @@ public class Lane : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (PlayerPrefs.GetString("BirdSkin") == "Default")
+            birdAnimator = birdAnimators[0];
+        else if (PlayerPrefs.GetString("BirdSkin") == "Halloween")
+            birdAnimator = birdAnimators[1];
+        
         cheatsOn = PlayerPrefs.GetInt("GodModeCheat") == 1;
     }
 

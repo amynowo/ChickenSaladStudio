@@ -11,13 +11,14 @@ public class GlobalVariables : MonoBehaviour
 {
     private bool notFirstObject = false;
 
-    public static Dictionary<int, bool> levels = new() { { 1, true }, { 2, false }, { 3, false }, { 4, false } };
+    public static Dictionary<int, bool> levels = new() { { 1, true }, { 2, false }, { 3, false }, { 4, false }, { 5, true }};
     public static int currentLevel = 1;
     
     private IEnumerator Start()
     {
         UpdateLevelStates();
         GetHighscores();
+        GetBirdSkins();
         GetCheats();
         StartCoroutine(nameof(LoadMidiFiles));
         yield break;
@@ -48,6 +49,12 @@ public class GlobalVariables : MonoBehaviour
             PlayerPrefs.SetInt("Level3Highscore", 0);
             PlayerPrefs.SetInt("Level4Highscore", 0);
         }
+    }
+
+    void GetBirdSkins()
+    {
+        if (!PlayerPrefs.HasKey("BirdSkin"))
+            PlayerPrefs.SetString("BirdSkin", "Default");
     }
 
     void GetCheats()
