@@ -16,7 +16,7 @@ public class GameResult : MonoBehaviour
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] AudioSource gameResultFailSFX;
     [SerializeField] AudioSource gameResultPassSFX;
-    public Animator[] birdAnimators;
+    public GameObject touchBoxes;
     
     [SerializeField] GameObject gameResultMenu;
     [SerializeField] GameObject[] gameResultMenuOverlays;
@@ -25,7 +25,10 @@ public class GameResult : MonoBehaviour
     [SerializeField] TextMeshProUGUI statistics;
     [SerializeField] GameObject pauseButton;
     [SerializeField] GameObject birds;
-    
+    private static readonly int Pass = Animator.StringToHash("Pass");
+    private static readonly int Fail = Animator.StringToHash("Fail");
+    private static readonly int FruitMissed = Animator.StringToHash("FruitMissed");
+
     void Start()
     {
         Instance = this;
@@ -46,17 +49,17 @@ public class GameResult : MonoBehaviour
 
         if (pass)
         {
-            foreach (var birdAnimator in birdAnimators)
-                birdAnimator.SetTrigger("Pass");
+            foreach (var bird in GameObject.FindGameObjectsWithTag($"{PlayerPrefs.GetString("BirdSkin")}Skin"))
+                bird.GetComponent<Animator>().SetTrigger(Pass);
 
             gameResultPassSFX.Play();
         }
         else
         {
-            foreach (var birdAnimator in birdAnimators)
+            foreach (var bird in GameObject.FindGameObjectsWithTag($"{PlayerPrefs.GetString("BirdSkin")}Skin"))
             {
-                birdAnimator.SetBool("Fail", true);
-                birdAnimator.SetTrigger("FruitMissed");
+                bird.GetComponent<Animator>().SetBool(Fail, true);
+                bird.GetComponent<Animator>().SetTrigger(FruitMissed);
             }
 
             gameResultFailSFX.Play();

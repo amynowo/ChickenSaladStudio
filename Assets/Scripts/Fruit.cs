@@ -27,8 +27,8 @@ public class Fruit : MonoBehaviour
         }
         else
         {
-            transform.localPosition = Vector3.Lerp(Vector3.up * LevelManager.Instance.fruitSpawnY, Vector3.up * LevelManager.Instance.fruitDespawnY, t); 
             GetComponent<SpriteRenderer>().enabled = true;
+            transform.localPosition = Vector3.Lerp(Vector3.up * LevelManager.Instance.fruitSpawnY, Vector3.up * LevelManager.Instance.fruitDespawnY, t);
         }
     }
 }
