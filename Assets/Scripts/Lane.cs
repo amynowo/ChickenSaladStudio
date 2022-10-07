@@ -23,6 +23,10 @@ public class Lane : MonoBehaviour
     
     int spawnIndex = 0;
     public int inputIndex = 0;
+
+    public RectTransform laneStartPosition;
+    public RectTransform laneEndPosition;
+    public GameObject hitBar;
     
     // range within error margin to get 'ok' accuracy
     public double noteOkAccRange1 = 0.10;
@@ -46,6 +50,9 @@ public class Lane : MonoBehaviour
             birdAnimator = birdAnimators[1];
         
         cheatsOn = PlayerPrefs.GetInt("GodModeCheat") == 1;
+
+        //Debug.Log($"laneStartPosition: {laneStartPosition.position.y} | laneEndPosition: {laneEndPosition.position.y} | {laneEndPosition.position.y + laneStartPosition.position.y / 2}");
+        hitBar.transform.position = new Vector3(0, (laneEndPosition.position.y + laneStartPosition.position.y) / 2, (float)100.0);
     }
 
     public void SetTimeStamps(Note[] array)
@@ -73,6 +80,7 @@ public class Lane : MonoBehaviour
 
                 // Setting the fruits assigned time so the fruit know when to spawn.
                 fruit.GetComponent<Fruit>().assignedTime = (float)timeStamps[spawnIndex];
+                fruit.GetComponent<Fruit>().SetMovePositions(laneStartPosition, laneEndPosition);
                 
                 // Moving on to the next fruit.
                 spawnIndex++;

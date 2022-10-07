@@ -55,7 +55,6 @@ public class GlobalVariables : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("BirdSkin"))
             PlayerPrefs.SetString("BirdSkin", "Default");
-        PlayerPrefs.SetString("BirdSkin", "Halloween");
     }
 
     void GetCheats()
