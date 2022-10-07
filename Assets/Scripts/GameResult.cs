@@ -21,6 +21,8 @@ public class GameResult : MonoBehaviour
     [SerializeField] GameObject[] gameResultMenuOverlays;
     [SerializeField] SpriteRenderer resultImage;
     public Sprite[] resultSprites;
+    [SerializeField] Button advancedStatButton;
+    [SerializeField] GameObject advancedStatsOverlay;
     [SerializeField] TextMeshProUGUI statistics;
     [SerializeField] GameObject pauseButton;
     [SerializeField] GameObject birds;
@@ -34,6 +36,7 @@ public class GameResult : MonoBehaviour
     {
         Instance = this;
         gameResultMenu.SetActive(false);
+        advancedStatsOverlay.SetActive(false);
     }
 
     public void EndLevel(bool pass)
@@ -41,8 +44,21 @@ public class GameResult : MonoBehaviour
         pauseButton.SetActive(false);
         LevelManager.Instance.musicAudioSource.Stop();
         StartCoroutine(PlaySfx(pass));
+        AdvancedStats();
     }
-    
+
+    public void AdvancedStats()
+    {
+        advancedStatsOverlay.SetActive(true);
+        resultImage.gameObject.SetActive(false);
+    }
+
+    public void AdvancedStatsBack()
+    {
+        resultImage.gameObject.SetActive(true);
+        advancedStatsOverlay.SetActive(false);
+    }
+
     IEnumerator PlaySfx(bool pass)
     {
         foreach (var bird in birds.GetComponentsInChildren<BoxCollider2D>())
