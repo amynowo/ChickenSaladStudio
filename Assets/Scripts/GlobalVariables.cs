@@ -11,13 +11,62 @@ public class GlobalVariables : MonoBehaviour
 {
     private bool notFirstObject = false;
 
-    public static Dictionary<int, bool> levels = new() { { 1, true }, { 2, false }, { 3, false }, { 4, false } };
+    public static Dictionary<int, bool> levels = new() { { 1, true }, { 2, false }, { 3, false }, { 4, false }, { 5, true }};
     public static int currentLevel = 1;
     
     private IEnumerator Start()
     {
+        UpdateLevelStates();
+        GetHighscores();
+        GetBirdSkins();
+        GetCheats();
         StartCoroutine(nameof(LoadMidiFiles));
         yield break;
+    }
+
+    void UpdateLevelStates()
+    {
+        if (!PlayerPrefs.HasKey("Level2Unlocked"))
+        {
+            PlayerPrefs.SetInt("Level2Unlocked", 0);
+            PlayerPrefs.SetInt("Level3Unlocked", 0);
+            PlayerPrefs.SetInt("Level4Unlocked", 0);
+        }
+        else
+        {
+            levels[2] = PlayerPrefs.GetInt("Level2Unlocked") == 1;
+            levels[3] = PlayerPrefs.GetInt("Level3Unlocked") == 1;
+            levels[4] = PlayerPrefs.GetInt("Level4Unlocked") == 1;
+        }
+    }
+
+    void GetHighscores()
+    {
+        if (!PlayerPrefs.HasKey("Level1Highscore"))
+        {
+            PlayerPrefs.SetInt("Level1Highscore", 0);
+            PlayerPrefs.SetInt("Level2Highscore", 0);
+            PlayerPrefs.SetInt("Level3Highscore", 0);
+            PlayerPrefs.SetInt("Level4Highscore", 0);
+        }
+    }
+
+    void GetBirdSkins()
+    {
+        if (!PlayerPrefs.HasKey("BirdSkin"))
+            PlayerPrefs.SetString("BirdSkin", "Default");
+    }
+
+    void GetCheats()
+    {
+        if (!PlayerPrefs.HasKey("GodModeCheat"))
+        {
+            PlayerPrefs.SetInt("GodModeCheatLocked", 1);
+            PlayerPrefs.SetInt("GodModeCheat", 0);
+            
+            PlayerPrefs.SetInt("ShortcutCheatLocked", 1);
+            PlayerPrefs.SetInt("ShortcutCheat", 0);
+        }
     }
     
     void Awake()

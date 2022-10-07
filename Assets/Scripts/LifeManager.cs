@@ -23,7 +23,6 @@ public class LifeManager : MonoBehaviour
             Instance.lifeObjects[lifeCount-1].SetActive(false);
 
         lifeCount--;
-        GameResult.Instance.lives--;
         if (lifeCount == 0)
         {
             GameResult.Instance.GetComponent<GameResult>().EndLevel(true);

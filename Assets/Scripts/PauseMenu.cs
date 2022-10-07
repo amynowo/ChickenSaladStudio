@@ -116,7 +116,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Home()
     {
-        GameResult.Instance.ResetStats();
+        ScoreManager.ResetStats();
         Time.timeScale = 1;
         SceneManager.LoadScene("StartScene");
     }

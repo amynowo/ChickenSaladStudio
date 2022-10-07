@@ -10,10 +10,14 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance;
     public SpriteRenderer backgroundImageObject;
     public Sprite[] backgroundImages;
+    
     [SerializeField] private AudioMixer audioMixer;
     public AudioSource musicAudioSource;
     public AudioClip[] audioClips;
+    
     public Lane[] lanes;
+    public GameObject[] birds;
+    
     public float songDelaySeconds;
     public double errorMargin; // in seconds
     public int inputDelayMilliseconds;
@@ -39,6 +43,11 @@ public class LevelManager : MonoBehaviour
 
         backgroundImageObject.sprite = backgroundImages[GlobalVariables.currentLevel - 1];
 
+        if (PlayerPrefs.GetString("BirdSkin") == "Default")
+            birds[0].SetActive(true);
+        else if (PlayerPrefs.GetString("BirdSkin") == "Halloween")
+            birds[1].SetActive(true);
+        
         var screenWidth = Screen.currentResolution.width;
         var screenHeight = Screen.currentResolution.height;
         if (screenWidth > screenHeight)
@@ -54,7 +63,9 @@ public class LevelManager : MonoBehaviour
 
         Instance = this;
         hitBar.transform.SetPositionAndRotation(new Vector3(0.0f, fruitTapY), new Quaternion());
-        GetDataFromMidi();
+        
+        if (GlobalVariables.currentLevel != 5)
+            GetDataFromMidi();
     }
     
     public void GetDataFromMidi()
