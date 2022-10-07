@@ -51,6 +51,8 @@ public class LevelManager : MonoBehaviour
         
         var screenWidth = Screen.currentResolution.width;
         var screenHeight = Screen.currentResolution.height;
+        
+        Debug.Log($"Width: {screenWidth} | Heigh: {screenHeight}");
         if (screenWidth > screenHeight)
         {
             fruitTapY = (float)-3.25;

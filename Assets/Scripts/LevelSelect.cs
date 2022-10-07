@@ -10,13 +10,17 @@ using Image = UnityEngine.UIElements.Image;
 
 public class LevelSelect : MonoBehaviour
 {
-    public GameObject scrollbar;
-    private float scrollPosition = 0;
-    private float[] position;
+    public GameObject[] levels;
+    private int currentLevel;
+    
+    public GameObject buttonLeft;
+    public GameObject buttonRight;
     
     // Start is called before the first frame update
     void Start()
     {
+        currentLevel = 0;
+        buttonLeft.SetActive(false);
         SetLevelAvailability();
     }
 
@@ -24,19 +28,34 @@ public class LevelSelect : MonoBehaviour
     {
         foreach (var level in GlobalVariables.levels)
         {
+            var levelObject = levels[level.Key - 1];
             if (PlayerPrefs.GetInt("ShortcutCheat") == 1)
             {
-                var levelObject = GetComponent<Transform>().GetComponentsInChildren<Transform>().First(x => x.gameObject.name == $"Level {level.Key}").gameObject;
                 levelObject.GetComponentInChildren<Transform>().Find("Button").gameObject.SetActive(true);
                 levelObject.GetComponentInChildren<Transform>().Find("Lock").gameObject.SetActive(false);
             }
             else
             {
-                var levelObject = GetComponent<Transform>().GetComponentsInChildren<Transform>().First(x => x.gameObject.name == $"Level {level.Key}").gameObject;
                 levelObject.GetComponentInChildren<Transform>().Find("Button").gameObject.SetActive(level.Value);
                 levelObject.GetComponentInChildren<Transform>().Find("Lock").gameObject.SetActive(!level.Value);
             }
         }
+
+        GetComponent<Transform>().GetComponentsInChildren<Transform>().First(x => x.gameObject.name == $"Level 1").gameObject.SetActive(true);
+    }
+
+    public void Left()
+    {
+        levels[currentLevel].SetActive(false);
+        currentLevel--;
+        levels[currentLevel].SetActive(true);
+    }
+    
+    public void Right()
+    {
+        levels[currentLevel].SetActive(false);
+        currentLevel++;
+        levels[currentLevel].SetActive(true);
     }
 
     public void StartLevel(int level)
@@ -53,37 +72,20 @@ public class LevelSelect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        position = new float[transform.childCount];
-        float distance = 1f / (position.Length - 1f);
-        for (int i = 0; i < position.Length; i++)
+        if (currentLevel == 0)
         {
-            position[i] = distance * i;
+            buttonLeft.SetActive(false);
+            buttonRight.SetActive(true);
         }
-
-        if (Input.touchCount > 0)
+        else if (currentLevel == levels.Length - 1)
         {
-            scrollPosition = scrollbar.GetComponent<Scrollbar>().value;
+            buttonLeft.SetActive(true);
+            buttonRight.SetActive(false);
         }
         else
         {
-            for (int i = 0; i < position.Length; i++)
-            {
-                if (scrollPosition < position[i] + (distance / 2) && scrollPosition > position[i] - (distance / 2))
-                    scrollbar.GetComponent<Scrollbar>().value = Mathf.Lerp(scrollbar.GetComponent<Scrollbar>().value, position[i], 0.1f);
-            }
-        }
-        
-        for (int i = 0; i < position.Length; i++)
-        {
-            if (scrollPosition < position[i] + (distance / 2) && scrollPosition > position[i] - (distance / 2))
-            {
-                transform.GetChild(i).localScale = Vector2.Lerp(transform.GetChild(i).localScale, new Vector2(1f, 1f), 0.1f);
-                for (int a = 0; a < position.Length; a++)
-                {
-                    if (a != i)
-                        transform.GetChild(a).localScale = Vector2.Lerp(transform.GetChild(a).localScale, new Vector2(0.8f, 0.8f), 0.1f);
-                }
-            }
+            buttonLeft.SetActive(true);
+            buttonRight.SetActive(true);
         }
     }
 }

@@ -39,6 +39,7 @@ public class Lane : MonoBehaviour
     // range within error margin to get 'perfect' accuracy
     public double notePerfectAccRange = 0.05;
 
+    private float adjustment; 
     private bool cheatsOn;
 
     // Start is called before the first frame update
@@ -52,7 +53,20 @@ public class Lane : MonoBehaviour
         cheatsOn = PlayerPrefs.GetInt("GodModeCheat") == 1;
 
         //Debug.Log($"laneStartPosition: {laneStartPosition.position.y} | laneEndPosition: {laneEndPosition.position.y} | {laneEndPosition.position.y + laneStartPosition.position.y / 2}");
-        hitBar.transform.position = new Vector3(0, (laneEndPosition.position.y + laneStartPosition.position.y) / 2, (float)100.0);
+        
+        decimal ratio = Decimal.Parse(Screen.currentResolution.width.ToString()) / Decimal.Parse(Screen.currentResolution.height.ToString());
+        
+        adjustment = 0;
+        if ((double)ratio < 0.4)
+            adjustment = -(float)ratio * 2;
+        else if ((double)ratio > 0.5 && (double)ratio < 0.6)
+            adjustment = (float)ratio * 2;
+        else if ((double)ratio > 0.6)
+            adjustment = (float)ratio * 4;
+        
+        hitBar.transform.position = new Vector3(0, ((laneEndPosition.position.y + laneStartPosition.position.y) / 2) + adjustment, (float)100.0);
+        laneStartPosition.SetPositionAndRotation(new Vector3(laneStartPosition.position.x, (laneStartPosition.position.y + adjustment)), new Quaternion(0, 0, 0, 0));
+        laneEndPosition.SetPositionAndRotation(new Vector3(laneEndPosition.position.x, (laneEndPosition.position.y + adjustment)), new Quaternion(0, 0, 0, 0));
     }
 
     public void SetTimeStamps(Note[] array)

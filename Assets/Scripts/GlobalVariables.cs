@@ -11,7 +11,7 @@ public class GlobalVariables : MonoBehaviour
 {
     private bool notFirstObject = false;
 
-    public static Dictionary<int, bool> levels = new() { { 1, true }, { 2, false }, { 3, false }, { 4, false }, { 5, true }};
+    public static Dictionary<int, bool> levels = new() { { 1, true }, { 2, false }, { 3, false }, { 4, false }};
     public static int currentLevel = 1;
     
     private IEnumerator Start()
