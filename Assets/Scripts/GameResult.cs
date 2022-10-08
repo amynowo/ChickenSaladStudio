@@ -25,8 +25,10 @@ public class GameResult : MonoBehaviour
     [SerializeField] Button advancedStatButton;
     [SerializeField] GameObject advancedStatsOverlay;
     [SerializeField] TextMeshProUGUI statistics;
-    [SerializeField] GameObject pauseButton;
     [SerializeField] GameObject birds;
+    
+    [SerializeField] GameObject[] coverGameObjects;
+    
     private static readonly int Pass = Animator.StringToHash("Pass");
     private static readonly int Fail = Animator.StringToHash("Fail");
     private static readonly int FruitMissed = Animator.StringToHash("FruitMissed");
@@ -40,7 +42,9 @@ public class GameResult : MonoBehaviour
 
     public void EndLevel(bool pass)
     {
-        pauseButton.SetActive(false);
+        foreach (var obj in coverGameObjects)
+            obj.SetActive(false);
+        
         LevelManager.Instance.musicAudioSource.Stop();
         StartCoroutine(PlaySfx(pass));
         AdvancedStats();

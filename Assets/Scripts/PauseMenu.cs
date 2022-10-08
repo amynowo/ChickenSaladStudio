@@ -17,8 +17,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject volumeOffButton;
     [SerializeField] private Slider musicVolumeSlider;
     
-    [SerializeField] GameObject birds;
-    [SerializeField] GameObject branch;
+    [SerializeField] GameObject[] coverGameObjects;
     [SerializeField] TextMeshProUGUI countdownText;
     
     private bool volumeMute;
@@ -33,10 +32,9 @@ public class PauseMenu : MonoBehaviour
         
         audioMixer.SetFloat("Theme", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
         SetMusicVolume();
-        
-        foreach (var bird in birds.GetComponentsInChildren<SpriteRenderer>())
-            bird.enabled = false;
-        //branch.GetComponent<SpriteRenderer>().sortingOrder = 0;
+
+        foreach (var obj in coverGameObjects)
+            obj.SetActive(false);
     }
 
     void SetMusicVolume()
@@ -80,9 +78,8 @@ public class PauseMenu : MonoBehaviour
 
     public void Continue()
     {
-        foreach (var bird in birds.GetComponentsInChildren<SpriteRenderer>())
-            bird.enabled = true;
-        //branch.GetComponent<SpriteRenderer>().sortingOrder = 4;
+        foreach (var obj in coverGameObjects)
+            obj.SetActive(true);
         
         audioMixer.SetFloat("Theme", -80);
         pauseMenu.SetActive(false);

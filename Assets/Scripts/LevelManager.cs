@@ -4,11 +4,12 @@ using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Interaction;
 using System.IO;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
-    public SpriteRenderer backgroundImageObject;
+    public Image backgroundImageObject;
     public Sprite[] backgroundImages;
     
     [SerializeField] private AudioMixer audioMixer;

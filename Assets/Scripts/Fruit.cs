@@ -8,10 +8,19 @@ public class Fruit : MonoBehaviour
     double timeInstantiated;
     public float assignedTime; // When the fruit supposed to be eaten
     
+    public RectTransform startPosition;
+    public RectTransform endPosition;
+    
     // Start is called before the first frame update
     void Start()
     {
         timeInstantiated = LevelManager.Instance.GetAudioSourceTime();
+    }
+
+    public void SetMovePositions(RectTransform newStartPosition, RectTransform newEndPosition)
+    {
+        startPosition = newStartPosition;
+        endPosition = newEndPosition;
     }
 
     // Update is called once per frame
@@ -28,7 +37,8 @@ public class Fruit : MonoBehaviour
         else
         {
             GetComponent<SpriteRenderer>().enabled = true;
-            transform.localPosition = Vector3.Lerp(Vector3.up * LevelManager.Instance.fruitSpawnY, Vector3.up * LevelManager.Instance.fruitDespawnY, t);
+            //transform.localPosition = Vector3.Lerp(Vector3.up * LevelManager.Instance.fruitSpawnY, Vector3.up * LevelManager.Instance.fruitDespawnY, t);
+            transform.position = Vector3.Lerp(startPosition.position, endPosition.position, t);
         }
     }
 }
