@@ -31,13 +31,13 @@ public class LevelSelect : MonoBehaviour
             var levelObject = levels[level.Key - 1];
             if (PlayerPrefs.GetInt("ShortcutCheat") == 1)
             {
-                levelObject.GetComponentInChildren<Transform>().Find("Button").gameObject.SetActive(true);
-                levelObject.GetComponentInChildren<Transform>().Find("Lock").gameObject.SetActive(false);
+                levelObject.GetComponentInChildren<Transform>().Find("Unlocked").gameObject.SetActive(true);
+                levelObject.GetComponentInChildren<Transform>().Find("Locked").gameObject.SetActive(false);
             }
             else
             {
-                levelObject.GetComponentInChildren<Transform>().Find("Button").gameObject.SetActive(level.Value);
-                levelObject.GetComponentInChildren<Transform>().Find("Lock").gameObject.SetActive(!level.Value);
+                levelObject.GetComponentInChildren<Transform>().Find("Unlocked").gameObject.SetActive(level.Value);
+                levelObject.GetComponentInChildren<Transform>().Find("Locked").gameObject.SetActive(!level.Value);
             }
         }
 

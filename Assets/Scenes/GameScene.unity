@@ -880,10 +880,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundImageObject: {fileID: 159377114}
   backgroundImages:
-  - {fileID: 21300000, guid: c86536483a9b796458dee4f46377c7dd, type: 3}
   - {fileID: 21300000, guid: 51fe3d42a3ef12c42b525326ace7d2c5, type: 3}
   - {fileID: 21300000, guid: ea3623dbf00018942bd5af2bc3be5a6a, type: 3}
   - {fileID: 21300000, guid: 805b618c8b948a145a8976f205b68d5d, type: 3}
+  - {fileID: 21300000, guid: 78815a20d84e64e47af57a24d0f06050, type: 3}
   - {fileID: 21300000, guid: 217f1252a19b0fb42836b336b454a649, type: 3}
   audioMixer: {fileID: 24100000, guid: 022ccbe2721bef649bb56c5e5963394c, type: 2}
   musicAudioSource: {fileID: 1077018523}
