@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 public class Touchbox : MonoBehaviour
 {
-    public Animator birdAnimator;
+    public Animator[] birdAnimators;
+    public Animator animator;
     
     [Range(1, 4)]
     public int laneNumber;
@@ -16,7 +18,8 @@ public class Touchbox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = birdAnimators[PlayerPrefs.GetInt(PlayerPrefs.GetString($"Bird{laneNumber}Skin"))];
+        animator.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -32,17 +35,17 @@ public class Touchbox : MonoBehaviour
                 if (GetComponent<BoxCollider2D>() == Physics2D.OverlapPoint(touchPosition))
                 {
                     currentIndex = lane.inputIndex;
-                    birdAnimator.SetBool("Eat", true);
+                    animator.SetBool("Eat", true);
                     currentLane = laneNumber;
                 }
                 else if (GetComponent<BoxCollider2D>() != Physics2D.OverlapPoint(touchPosition))
                 {
-                    birdAnimator.SetBool("Eat", false);
+                    animator.SetBool("Eat", false);
                 }
             }
             else if (Input.touchCount > 0 && Input.GetTouch(0).phase is TouchPhase.Ended)
             {
-                birdAnimator.SetBool("Eat", false);
+                animator.SetBool("Eat", false);
             }
         }
     }

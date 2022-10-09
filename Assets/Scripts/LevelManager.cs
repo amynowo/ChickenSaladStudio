@@ -17,7 +17,6 @@ public class LevelManager : MonoBehaviour
     public AudioClip[] audioClips;
     
     public Lane[] lanes;
-    public GameObject[] birds;
     
     public float songDelaySeconds;
     public double errorMargin; // in seconds
@@ -44,15 +43,9 @@ public class LevelManager : MonoBehaviour
 
         backgroundImageObject.sprite = backgroundImages[GlobalVariables.currentLevel - 1];
 
-        if (PlayerPrefs.GetString("BirdSkin") == "Default")
-            birds[0].SetActive(true);
-        else if (PlayerPrefs.GetString("BirdSkin") == "Halloween")
-            birds[1].SetActive(true);
-        
         var screenWidth = Screen.currentResolution.width;
         var screenHeight = Screen.currentResolution.height;
         
-        Debug.Log($"Width: {screenWidth} | Heigh: {screenHeight}");
         if (screenWidth > screenHeight)
         {
             fruitTapY = (float)-3.25;

@@ -6,8 +6,6 @@ TagManager:
   tags:
   - ThemeMusic
   - GlobalVariables
-  - DefaultSkin
-  - HalloweenSkin
   layers:
   - Default
   - TransparentFX

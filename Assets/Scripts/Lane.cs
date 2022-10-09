@@ -12,8 +12,7 @@ public class Lane : MonoBehaviour
     [Range(1, 4)]
     public int laneNumber;
 
-    private Animator birdAnimator;
-    public Animator[] birdAnimators;
+    public Touchbox bird;
     public Animator accuracyAnimator;
     public GameObject fruitPrefab;
     List<Fruit> fruits = new List<Fruit>();
@@ -45,11 +44,6 @@ public class Lane : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (PlayerPrefs.GetString("BirdSkin") == "Default")
-            birdAnimator = birdAnimators[0];
-        else if (PlayerPrefs.GetString("BirdSkin") == "Halloween")
-            birdAnimator = birdAnimators[1];
-        
         cheatsOn = PlayerPrefs.GetInt("GodModeCheat") == 1;
 
         //Debug.Log($"laneStartPosition: {laneStartPosition.position.y} | laneEndPosition: {laneEndPosition.position.y} | {laneEndPosition.position.y + laneStartPosition.position.y / 2}");
@@ -136,7 +130,7 @@ public class Lane : MonoBehaviour
                     Destroy(Instantiate(noteAccuracyDisplay), 0.2f);
 
                     // Tap on worm
-                    birdAnimator.SetTrigger("FruitCaught");
+                    bird.animator.SetTrigger("FruitCaught");
                     Destroy(fruits[inputIndex].gameObject);
                     inputIndex++;
                 }
@@ -153,13 +147,13 @@ public class Lane : MonoBehaviour
             {
                 Miss();
                 accuracyAnimator.SetTrigger("Miss");
-                birdAnimator.SetTrigger("FruitMissed");
+                bird.animator.SetTrigger("FruitMissed");
                 inputIndex++;
             }
             else if (cheatsOn && Math.Abs(audioTime - timeStamp) <= 0.2)
             {
                 accuracyAnimator.SetTrigger("Perfect");
-                birdAnimator.SetTrigger("FruitCaught");
+                bird.animator.SetTrigger("FruitCaught");
                 Hit("Perfect");
                 
                 Destroy(Instantiate(noteAccuracyDisplay), 0.2f);

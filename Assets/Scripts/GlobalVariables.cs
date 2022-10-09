@@ -53,8 +53,36 @@ public class GlobalVariables : MonoBehaviour
 
     void GetBirdSkins()
     {
-        if (!PlayerPrefs.HasKey("BirdSkin"))
-            PlayerPrefs.SetString("BirdSkin", "Default");
+        PlayerPrefs.DeleteKey("Bird1Skin");
+        if (!PlayerPrefs.HasKey("Bird1Skin"))
+        {
+            PlayerPrefs.SetString("Bird1Skin", "Default");
+            PlayerPrefs.SetString("Bird2Skin", "Halloween");
+            PlayerPrefs.SetString("Bird3Skin", "Christmas");
+            PlayerPrefs.SetString("Bird4Skin", "Sunglasses");
+            
+            // All birds
+            PlayerPrefs.SetInt("Default", 0);
+            PlayerPrefs.SetInt("Halloween", 1);
+            PlayerPrefs.SetInt("Winter", 2);
+            PlayerPrefs.SetInt("Christmas", 3);
+            
+            // Bird 1 (Chico)
+            PlayerPrefs.SetInt("Hat", 4);
+            PlayerPrefs.SetInt("Space", 5);
+            
+            // Bird 2 (Guava)
+            PlayerPrefs.SetInt("Flower", 4);
+            PlayerPrefs.SetInt("HeartGlasses", 5);
+            
+            // Bird 3 (Loki)
+            PlayerPrefs.SetInt("Gangsta", 4);
+            PlayerPrefs.SetInt("Halster", 5);
+            
+            // Bird 4 (Bolo)
+            PlayerPrefs.SetInt("Choker", 4);
+            PlayerPrefs.SetInt("Sunglasses", 5);
+        }
     }
 
     void GetCheats()
