@@ -35,17 +35,17 @@ public class Touchbox : MonoBehaviour
                 if (GetComponent<BoxCollider2D>() == Physics2D.OverlapPoint(touchPosition))
                 {
                     currentIndex = lane.inputIndex;
-                    animator.SetBool("Eat", true);
+                    //animator.SetBool("Eat", true);
                     currentLane = laneNumber;
                 }
                 else if (GetComponent<BoxCollider2D>() != Physics2D.OverlapPoint(touchPosition))
                 {
-                    animator.SetBool("Eat", false);
+                    //animator.SetBool("Eat", false);
                 }
             }
             else if (Input.touchCount > 0 && Input.GetTouch(0).phase is TouchPhase.Ended)
             {
-                animator.SetBool("Eat", false);
+                //animator.SetBool("Eat", false);
             }
         }
     }

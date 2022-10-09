@@ -23,7 +23,7 @@ public class GameResult : MonoBehaviour
     [SerializeField] SpriteRenderer resultImage;
     public Sprite[] resultSprites;
     [SerializeField] TextMeshProUGUI statistics;
-    [SerializeField] GameObject birds;
+    [SerializeField] Touchbox[] birds;
     
     [SerializeField] GameObject[] coverGameObjects;
     
@@ -48,22 +48,22 @@ public class GameResult : MonoBehaviour
 
     IEnumerator PlaySfx(bool pass)
     {
-        foreach (var bird in birds.GetComponentsInChildren<BoxCollider2D>())
-            bird.enabled = false;
+        foreach (var bird in birds)
+            bird.gameObject.GetComponent<BoxCollider2D>().enabled = false;
 
         if (pass)
         {
-            foreach (var bird in GameObject.FindGameObjectsWithTag($"{PlayerPrefs.GetString("BirdSkin")}Skin"))
-                bird.GetComponent<Animator>().SetTrigger(Pass);
+            foreach (var bird in birds)
+                bird.animator.SetTrigger(Pass);
 
             gameResultPassSFX.Play();
         }
         else
         {
-            foreach (var bird in GameObject.FindGameObjectsWithTag($"{PlayerPrefs.GetString("BirdSkin")}Skin"))
+            foreach (var bird in birds)
             {
-                bird.GetComponent<Animator>().SetBool(Fail, true);
-                bird.GetComponent<Animator>().SetTrigger(FruitMissed);
+                bird.animator.SetBool(Fail, true);
+                bird.animator.SetTrigger(FruitMissed);
             }
 
             gameResultFailSFX.Play();
