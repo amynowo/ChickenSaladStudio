@@ -18,6 +18,11 @@ public class ScoreManager : MonoBehaviour
     public static int score;
     public static int currentCombo;
     public static int highestCombo;
+    public static int bonusScore;
+    public static int levelPoints; // points per level
+    public static int allPoints; // total points
+
+    public static int amountFruitPerLevel; // total amount of fruit per level
     
     public bool[] laneCheck;
     private bool gameFinished = false;
@@ -34,7 +39,7 @@ public class ScoreManager : MonoBehaviour
 
         ResetStats();
     }
-    
+
     public static void ResetStats()
     {
         totalFruits = 0;
@@ -45,7 +50,9 @@ public class ScoreManager : MonoBehaviour
         score = 0;
         currentCombo = 0;
         highestCombo = 0;
-    }
+        bonusScore = 0;
+        levelPoints = 0;
+}
     
     public static void Hit(string accuracy)
     {
@@ -73,6 +80,7 @@ public class ScoreManager : MonoBehaviour
     }
     public static void Miss()
     {
+        // resets combo
         totalFruits++;
         if (currentCombo > highestCombo)
             highestCombo = currentCombo;
@@ -86,7 +94,7 @@ public class ScoreManager : MonoBehaviour
         {
             gameFinished = true;
             if (currentCombo > highestCombo)
-                highestCombo = currentCombo;
+                highestCombo = currentCombo; // sets highest combo
             
             Invoke(nameof(FinishGame), 1.5f);
         }
