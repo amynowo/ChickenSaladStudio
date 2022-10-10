@@ -53,7 +53,6 @@ public class GlobalVariables : MonoBehaviour
 
     void GetBirdSkins()
     {
-        PlayerPrefs.DeleteKey("Bird1Skin");
         if (!PlayerPrefs.HasKey("Bird1Skin"))
         {
             PlayerPrefs.SetString("Bird1Skin", "Bird1Default");
@@ -83,7 +82,7 @@ public class GlobalVariables : MonoBehaviour
             PlayerPrefs.SetInt("Bird2ChristmasUnlocked", 0);
             PlayerPrefs.SetInt("Bird2FlowerUnlocked", 0);
             PlayerPrefs.SetInt("Bird2HeartGlassesUnlocked", 0);
-            
+
             PlayerPrefs.SetInt("Bird2Default", 0);
             PlayerPrefs.SetInt("Bird2Halloween", 1);
             PlayerPrefs.SetInt("Bird2Winter", 2);
@@ -113,6 +112,7 @@ public class GlobalVariables : MonoBehaviour
             PlayerPrefs.SetInt("Bird4ChristmasUnlocked", 0);
             PlayerPrefs.SetInt("Bird4ChokerUnlocked", 0);
             PlayerPrefs.SetInt("Bird4SunglassesUnlocked", 0);
+            PlayerPrefs.SetInt("Bird4GuitarUnlocked", 0);
             
             PlayerPrefs.SetInt("Bird4Default", 0);
             PlayerPrefs.SetInt("Bird4Halloween", 1);
@@ -120,6 +120,7 @@ public class GlobalVariables : MonoBehaviour
             PlayerPrefs.SetInt("Bird4Christmas", 3);
             PlayerPrefs.SetInt("Bird4Choker", 4);
             PlayerPrefs.SetInt("Bird4Sunglasses", 5);
+            PlayerPrefs.SetInt("Bird4Guitar", 5);
         }
     }
 

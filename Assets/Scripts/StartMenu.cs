@@ -43,7 +43,7 @@ public class StartMenu : MonoBehaviour
 
     public void OpenStore()
     {
-        SceneManager.LoadScene("StoreScene");
+        SceneManager.LoadScene("AccessoriesScene");
     }
     
     public void OpenSettings()

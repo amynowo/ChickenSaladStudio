@@ -478,7 +478,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 320, y: 100}
+  m_SizeDelta: {x: 640, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &349815631
 MonoBehaviour:
@@ -556,7 +556,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bf0d859c0efa61a46b682ed3b1d68583, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a7d3c7dc5475fea4297b7e6a924ad4bb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1882,7 +1882,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2047971647}
   m_Layer: 5
-  m_Name: StoreButton
+  m_Name: AccessoriesButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SoundScene.unity
     guid: 38feb53243e31fa4b979a232b4417478
   - enabled: 1
-    path: Assets/Scenes/StoreScene.unity
+    path: Assets/Scenes/AccessoriesScene.unity
     guid: 68350cc36c142d4438532b8ec34410d9
   - enabled: 1
     path: Assets/Scenes/CheatScene.unity

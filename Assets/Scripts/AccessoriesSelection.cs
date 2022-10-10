@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Store : MonoBehaviour
+public class AccessoriesSelection : MonoBehaviour
 {
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +14,7 @@ public class Store : MonoBehaviour
     
     public void Back()
     {
-            SceneManager.LoadScene("StartScene");
+        SceneManager.LoadScene("StartScene");
     }
 
     // Update is called once per frame
