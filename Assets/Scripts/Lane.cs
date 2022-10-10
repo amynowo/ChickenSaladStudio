@@ -42,6 +42,8 @@ public class Lane : MonoBehaviour
     private float adjustment; 
     private bool cheatsOn;
 
+    public static int amountNotes; // total amount of notes per level
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,14 +68,22 @@ public class Lane : MonoBehaviour
 
     public void SetTimeStamps(Note[] array)
     {
+        amountNotes = 0;
         foreach (var note in array)
         {
+            amountNotes++;
             if (note.NoteName == noteRestriction)
             {
                 var metricTimeSpan = TimeConverter.ConvertTo<MetricTimeSpan>(note.Time, LevelManager.Instance.midiFile.GetTempoMap());
                 timeStamps.Add((double)metricTimeSpan.Minutes * 60f + metricTimeSpan.Seconds + (double)metricTimeSpan.Milliseconds / 1000f);
             }
         }
+        
+    }
+
+    public static int AmountNotes()
+    {
+        return amountNotes;
     }
     
     // Update is called once per frame, fixed update is called at set time

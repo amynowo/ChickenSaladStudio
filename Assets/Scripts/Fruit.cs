@@ -23,7 +23,6 @@ public class Fruit : MonoBehaviour
         endPosition = newEndPosition;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         double timeSinceInstantiated = LevelManager.Instance.GetAudioSourceTime() - timeInstantiated;
@@ -42,3 +41,4 @@ public class Fruit : MonoBehaviour
         }
     }
 }
+    
