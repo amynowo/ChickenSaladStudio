@@ -15,6 +15,7 @@ public class Lane : MonoBehaviour
     public Touchbox bird;
     public Animator accuracyAnimator;
     public GameObject fruitPrefab;
+    public GameObject petaBirdPrefab;
     List<Fruit> fruits = new List<Fruit>();
 
     public GameObject noteAccuracyDisplay;
@@ -83,7 +84,7 @@ public class Lane : MonoBehaviour
             if (LevelManager.Instance.GetAudioSourceTime() >= timeStamps[spawnIndex] - LevelManager.Instance.fruitTime)
             {
                 // Inistantiating a fruit and adding it to the list of fruits.
-                var fruit = Instantiate(fruitPrefab, transform);
+                var fruit = Instantiate(PlayerPrefs.GetInt("PETACheat") == 1 ? petaBirdPrefab : fruitPrefab, transform);
                 fruits.Add(fruit.GetComponent<Fruit>());
 
                 // Setting the fruits assigned time so the fruit know when to spawn.

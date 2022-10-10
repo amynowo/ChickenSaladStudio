@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Touchbox : MonoBehaviour
 {
@@ -18,7 +20,16 @@ public class Touchbox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = birdAnimators[PlayerPrefs.GetInt(PlayerPrefs.GetString($"Bird{laneNumber}Skin"))];
+        if (PlayerPrefs.GetInt("MotherlodeCheat") == 1)
+        {
+            Animator[] shuffledBirdAnimators = birdAnimators.OrderBy(n => Guid.NewGuid()).ToArray();
+            animator = shuffledBirdAnimators[PlayerPrefs.GetInt(PlayerPrefs.GetString($"Bird{laneNumber}Skin"))];
+        }
+        else
+        {
+            animator = birdAnimators[PlayerPrefs.GetInt(PlayerPrefs.GetString($"Bird{laneNumber}Skin"))];
+        }
+        
         animator.gameObject.SetActive(true);
     }
 

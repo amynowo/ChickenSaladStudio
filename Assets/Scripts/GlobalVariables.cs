@@ -120,7 +120,7 @@ public class GlobalVariables : MonoBehaviour
             PlayerPrefs.SetInt("Bird4Christmas", 3);
             PlayerPrefs.SetInt("Bird4Choker", 4);
             PlayerPrefs.SetInt("Bird4Sunglasses", 5);
-            PlayerPrefs.SetInt("Bird4Guitar", 5);
+            PlayerPrefs.SetInt("Bird4Guitar", 6);
         }
     }
 
@@ -133,7 +133,21 @@ public class GlobalVariables : MonoBehaviour
             
             PlayerPrefs.SetInt("ShortcutCheatLocked", 1);
             PlayerPrefs.SetInt("ShortcutCheat", 0);
+            
+            PlayerPrefs.SetInt("MotherlodeCheatLocked", 1);
+            PlayerPrefs.SetInt("MotherlodeCheat", 0);
+            
+            PlayerPrefs.SetInt("PETACheatLocked", 1);
+            PlayerPrefs.SetInt("PETAcutCheat", 0);
+            
+            PlayerPrefs.SetInt("ResetCheatLocked", 1);
+            PlayerPrefs.SetInt("ResetCheat", 0);
         }
+    }
+
+    public static void ResetEverything()
+    {
+        PlayerPrefs.DeleteAll();
     }
     
     void Awake()
