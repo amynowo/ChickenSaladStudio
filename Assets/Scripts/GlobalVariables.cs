@@ -48,6 +48,8 @@ public class GlobalVariables : MonoBehaviour
             PlayerPrefs.SetInt("Level2Highscore", 0);
             PlayerPrefs.SetInt("Level3Highscore", 0);
             PlayerPrefs.SetInt("Level4Highscore", 0);
+            
+            PlayerPrefs.SetInt("PlayerPoints", 0);
         }
     }
 

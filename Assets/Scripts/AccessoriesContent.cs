@@ -11,6 +11,7 @@ public class AccessoriesContent : MonoBehaviour
     [SerializeField] public GameObject[] accessoriesContentObjects;
 
     [SerializeField] public TextMeshProUGUI unlockOverlayText;
+    [SerializeField] public TextMeshProUGUI playerPointsText;
 
     public int birdIndex;
 
@@ -18,12 +19,14 @@ public class AccessoriesContent : MonoBehaviour
     public GameObject buttonRight;
 
     private int currentAccessory;
+    private int currentAccessoryPrice;
         
     // Start is called before the first frame update
     void Start()
     {
         currentAccessory = 0;
         SetCosmeticsAvailability();
+        SetPlayerPoints();
     }
 
     void SetCosmeticsAvailability()
@@ -87,23 +90,45 @@ public class AccessoriesContent : MonoBehaviour
 
     public void ChangeUnlockOverlayText()
     {
-        unlockOverlayText.text = $"unlock for {(accessoriesContentObjects[currentAccessory].name.StartsWith("Collection") ? "1500" : "400")}";
+        currentAccessoryPrice = accessoriesContentObjects[currentAccessory].name.StartsWith("Collection") ? 1500 : 400;
+        unlockOverlayText.text = $"unlock for {currentAccessoryPrice}";
     }
 
     public void Unlock()
     {
         string accessoryName = accessoriesContentObjects[currentAccessory].name;
+        int currentPlayerPoints = PlayerPrefs.GetInt("PlayerPoints");
+        Debug.Log(birdIndex);
         if (birdIndex == 0)
         {
-            for (int i = 1; i < 5; i++)
-                PlayerPrefs.SetInt($"Bird{i + accessoryName.Split("Collection").Last()}Unlocked", 1);
+            if (currentPlayerPoints >= currentAccessoryPrice)
+            {
+                for (int i = 1; i < 5; i++)
+                    PlayerPrefs.SetInt($"Bird{i + accessoryName.Split("Collection").Last()}Unlocked", 1);
+
+                currentPlayerPoints -= currentAccessoryPrice;
+                PlayerPrefs.SetInt("PlayerPoints", currentPlayerPoints);
+                SetPlayerPoints();
+            }
         }
         else
         {
-            PlayerPrefs.SetInt($"Bird{birdIndex + accessoryName}Unlocked", 1);
+            if (currentPlayerPoints >= currentAccessoryPrice)
+            {
+                PlayerPrefs.SetInt($"{accessoryName}Unlocked", 1);
+                currentPlayerPoints -= currentAccessoryPrice;
+                PlayerPrefs.SetInt("PlayerPoints", currentPlayerPoints);
+                  
+                SetPlayerPoints();
+            }
         }
         
         SetCosmeticsAvailability();
+    }
+
+    private void SetPlayerPoints()
+    {
+        playerPointsText.text = $"points\n{PlayerPrefs.GetInt("PlayerPoints")}";
     }
 
     public void Enable()

@@ -43,6 +43,8 @@ public class GameResult : MonoBehaviour
     private static readonly int Fail = Animator.StringToHash("Fail");
     private static readonly int FruitMissed = Animator.StringToHash("FruitMissed");
 
+    public bool levelPass;
+
     void Start()
     {
         Instance = this;
@@ -51,19 +53,20 @@ public class GameResult : MonoBehaviour
 
     public void EndLevel(bool pass)
     {
+        levelPass = pass;
         foreach (var obj in coverGameObjects)
             obj.SetActive(false);
 
         LevelManager.Instance.musicAudioSource.Stop();
-        StartCoroutine(PlaySfx(pass));
+        StartCoroutine(PlaySfx());
     }
 
-    IEnumerator PlaySfx(bool pass)
+    IEnumerator PlaySfx()
     {
         foreach (var bird in birds)
             bird.gameObject.GetComponent<BoxCollider2D>().enabled = false;
 
-        if (pass)
+        if (levelPass)
         {
             foreach (var bird in birds)
                 bird.animator.SetTrigger(Pass);
@@ -82,13 +85,13 @@ public class GameResult : MonoBehaviour
         }
 
         yield return new WaitForSeconds(3);
-        OpenGameResult(pass);
+        OpenGameResult();
     }
     
-    public void OpenGameResult(bool pass)
+    public void OpenGameResult()
     {
         audioMixer.SetFloat("Theme", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
-        if (pass)
+        if (levelPass)
         {
             gameResultMenuOverlays[0].SetActive(false);
             resultImage.sprite = Instance.resultSprites[1];
@@ -158,8 +161,6 @@ public class GameResult : MonoBehaviour
         resultImage.gameObject.SetActive(false);
 
         // score with accuracy
-        Debug.Log($"bonus acc: {CalculateBonusAcc()} |bonus combo: {CalculateBonusCombo()} | allPoints: {ScoreManager.allPoints} Total notes: {Lane.AmountNotes()} | Score: {ScoreManager.score} | Highest combo: {ScoreManager.highestCombo} | Points: score {ScoreManager.score} + highest combo {ScoreManager.highestCombo} = {ScoreManager.score + ScoreManager.highestCombo}");
-        Debug.Log($"Ok: {ScoreManager.okHits} | Good: {ScoreManager.goodHits} | Perfect: {ScoreManager.perfectHits}");
         statisticsAcc.text = $"accuracy {CalculateAccuracy()} / 100";
         
         if (ScoreManager.score > PlayerPrefs.GetInt($"Level{GlobalVariables.currentLevel}HighScore"))
@@ -168,18 +169,23 @@ public class GameResult : MonoBehaviour
         // highest combo
         statisticsCombo.text = $"highest combo {ScoreManager.highestCombo}";
         
-        // bonus
-        statisticsBonus.text = $"bonus ";
-
-        // total points
-        statisticsPoints.text = $"points   {CalculatePoints()}";
-
+        if (levelPass)
+        {
+            statisticsPoints.text = levelPass ? $"points {CalculatePoints()}" : "";
+            statisticsBonus.text = $"bonus {CalculateBonusAcc() + CalculateBonusCombo()}";
+            
+            PlayerPrefs.SetInt("PlayerPoints", PlayerPrefs.GetInt("PlayerPoints", 0) + CalculatePoints());
+        }
+        else
+        {
+            statisticsPoints.text = "";
+            statisticsBonus.text = "";
+        }
+        
         // stats per acc
-        statisticsOk.text = $"ok hits   {ScoreManager.okHits}";
-        statisticsGood.text = $"good hits   {ScoreManager.goodHits}";
-        statisticsPerfect.text = $"perfect hits   {ScoreManager.perfectHits}";
-
-
+        statisticsOk.text = $"ok hits {ScoreManager.okHits}";
+        statisticsGood.text = $"good hits {ScoreManager.goodHits}";
+        statisticsPerfect.text = $"perfect hits {ScoreManager.perfectHits}";
     }
 
     public void ExitStats()
