@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 using System.IO;
 using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Interaction;
+using Unity.VisualScripting;
 
 public class GlobalVariables : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class GlobalVariables : MonoBehaviour
 
     public static Dictionary<int, bool> levels = new() { { 1, true }, { 2, false }, { 3, false }, { 4, false }};
     public static int currentLevel = 1;
-    
+
+    public static bool reset;
     private IEnumerator Start()
     {
         UpdateLevelStates();
@@ -132,24 +134,27 @@ public class GlobalVariables : MonoBehaviour
         {
             PlayerPrefs.SetInt("GodModeCheatLocked", 1);
             PlayerPrefs.SetInt("GodModeCheat", 0);
-            
+        }
+        if (!PlayerPrefs.HasKey("ShortcutCheat"))
+        {
             PlayerPrefs.SetInt("ShortcutCheatLocked", 1);
             PlayerPrefs.SetInt("ShortcutCheat", 0);
-            
+        }
+        if (!PlayerPrefs.HasKey("MotherlodeCheat"))
+        {
             PlayerPrefs.SetInt("MotherlodeCheatLocked", 1);
             PlayerPrefs.SetInt("MotherlodeCheat", 0);
-            
+        }
+        if (!PlayerPrefs.HasKey("PETAcutCheat"))
+        {
             PlayerPrefs.SetInt("PETACheatLocked", 1);
             PlayerPrefs.SetInt("PETAcutCheat", 0);
-            
+        }
+        if (!PlayerPrefs.HasKey("ResetCheat"))
+        {
             PlayerPrefs.SetInt("ResetCheatLocked", 1);
             PlayerPrefs.SetInt("ResetCheat", 0);
         }
-    }
-
-    public static void ResetEverything()
-    {
-        PlayerPrefs.DeleteAll();
     }
     
     void Awake()
@@ -197,6 +202,17 @@ public class GlobalVariables : MonoBehaviour
                     File.WriteAllBytes(midiPersistentDataFilePath, midiByteData);
                 }
             }
+        }
+    }
+    private void Update()
+    {
+        if (reset)
+        {
+            reset = false;
+            UpdateLevelStates();
+            GetHighscores();
+            GetBirdSkins();
+            GetCheats();
         }
     }
 }

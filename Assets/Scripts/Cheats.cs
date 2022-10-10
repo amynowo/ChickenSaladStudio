@@ -184,7 +184,7 @@ public class Cheats : MonoBehaviour
             motherlodeCheatOnButton.SetActive(!motherlodeCheatOn);
             motherlodeCheatOffButton.SetActive(motherlodeCheatOn);
             motherlodeCheatOn = !motherlodeCheatOn;
-            PlayerPrefs.SetInt("MotherlodecutCheat", motherlodeCheatOn ? 1 : 0);
+            PlayerPrefs.SetInt("MotherlodeCheat", motherlodeCheatOn ? 1 : 0);
         }
         else if (cheat == "peta")
         {
@@ -198,11 +198,13 @@ public class Cheats : MonoBehaviour
             resetCheatOnButton.SetActive(!resetCheatOn);
             resetCheatOffButton.SetActive(resetCheatOn);
             resetCheatOn = !resetCheatOn;
+            Debug.Log(resetCheatOn);
             PlayerPrefs.SetInt("ResetCheat", resetCheatOn ? 1 : 0);
 
             if (resetCheatOn)
             {
-                GlobalVariables.ResetEverything();
+                PlayerPrefs.DeleteAll();
+                GlobalVariables.reset = true;
                 SceneManager.LoadScene("StartScene");
             }
         }

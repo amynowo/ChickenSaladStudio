@@ -98,7 +98,6 @@ public class AccessoriesContent : MonoBehaviour
     {
         string accessoryName = accessoriesContentObjects[currentAccessory].name;
         int currentPlayerPoints = PlayerPrefs.GetInt("PlayerPoints");
-        Debug.Log(birdIndex);
         if (birdIndex == 0)
         {
             if (currentPlayerPoints >= currentAccessoryPrice)
